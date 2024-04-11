@@ -1,4 +1,4 @@
-package RollingRolling.RollingMindBackend.domain;
+package RollingRolling.RollingMindBackend.domain.room;
 
 import jakarta.persistence.*;
 import lombok.*;
