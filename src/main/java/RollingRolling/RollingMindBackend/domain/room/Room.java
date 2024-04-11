@@ -1,15 +1,14 @@
 package RollingRolling.RollingMindBackend.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Rooms {
+@Table(name = "rooms")
+public class Room {
     @Id
     @Column(nullable = false)
     private String room_id;
@@ -24,7 +23,7 @@ public class Rooms {
     private String participation_request;
 
     @Builder
-    public Rooms(String room_id, int host_id, String open, String participation_request){
+    public Room(String room_id, int host_id, String open, String participation_request){
         this.room_id = room_id;
         this.host_id = host_id;
         this.open = open;
