@@ -1,4 +1,4 @@
-package RollingRolling.RollingMindBackend.repository;
+package RollingRolling.RollingMindBackend.repository.room;
 
 import RollingRolling.RollingMindBackend.domain.room.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
