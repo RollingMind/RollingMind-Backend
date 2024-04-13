@@ -16,14 +16,16 @@ public class Room {
     @Column(nullable = false)
     private int host_id;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String open;
+    private RoomOpen open;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String participation_request;
+    private RoomParticipantionRequest participation_request;
 
     @Builder
-    public Room(String room_id, int host_id, String open, String participation_request){
+    public Room(String room_id, int host_id, RoomOpen open, RoomParticipantionRequest participation_request){
         this.room_id = room_id;
         this.host_id = host_id;
         this.open = open;
