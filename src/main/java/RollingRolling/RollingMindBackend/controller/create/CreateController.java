@@ -16,13 +16,13 @@ public class CreateController {
     private final CreateService createService;
 
     @PostMapping
-    public ResponseEntity<?> createRoom(@RequestBody AddCreateRequest request){
-        AddCreateRequest addCreateRequest = createService.saveRoomAndPostIt(request);
+    public ResponseEntity<?> createRoom(@RequestBody AddCreateRequest request) {  //방 생성
+        AddCreateRequest addCreateRequest = createService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(addCreateRequest);
     }
 
     @GetMapping
-    public ResponseEntity<?> createInviteCode(){
+    public ResponseEntity<?> createInviteCode(){  //초대코드
         String invite_code = createService.generateInviteCode();
         return ResponseEntity.ok().body(Map.of("invite_code", invite_code));
     }

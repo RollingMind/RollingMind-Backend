@@ -20,7 +20,7 @@ public class CreateService {
     private final RoomRepository roomRepository;
     private final PostItRepository postItRepository;
     @Transactional
-    public AddCreateRequest saveRoomAndPostIt(AddCreateRequest request){
+    public AddCreateRequest save(AddCreateRequest request){  //방 테이블에 저장
         //공개 날짜 체크
         if(request.getRelease_date() != null){
             LocalDateTime release_date = LocalDateTime.parse(String.valueOf(request.getRelease_date()));
@@ -49,7 +49,7 @@ public class CreateService {
         return request;
     }
 
-    public String generateInviteCode(){
+    public String generateInviteCode(){  //방 초대코드 랜덤생성 메서드
         String invite_code;
         do {
             invite_code = "3" + RandomStringUtils.randomNumeric(5);  //3XXXXX 초대코드(방 아이디) 생성
