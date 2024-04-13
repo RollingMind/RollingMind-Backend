@@ -1,6 +1,7 @@
 package RollingRolling.RollingMindBackend.service.participant;
 
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
+import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import RollingRolling.RollingMindBackend.dto.participant.AddParticipantRequest;
 import RollingRolling.RollingMindBackend.repository.participant.ParticipantRepository;
 import lombok.RequiredArgsConstructor;
