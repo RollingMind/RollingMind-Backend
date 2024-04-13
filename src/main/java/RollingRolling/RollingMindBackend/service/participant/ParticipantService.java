@@ -22,4 +22,8 @@ public class ParticipantService {
 
         return participantRepository.save(participant);
     }
+
+    public void delete(Long id){
+        participantRepository.deleteById(id);
+    }
 }

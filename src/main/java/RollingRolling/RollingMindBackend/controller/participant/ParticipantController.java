@@ -18,4 +18,9 @@ public class ParticipantController {
         Participant addParticipantRequest = participantService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(addParticipantRequest);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteParticipant(@PathVariable Long id){
+        participantService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }
