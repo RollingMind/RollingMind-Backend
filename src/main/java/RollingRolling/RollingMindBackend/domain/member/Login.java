@@ -1,2 +1,5 @@
-package RollingRolling.RollingMindBackend.domain.member;public class Login {
+package RollingRolling.RollingMindBackend.domain.member;
+
+public enum Login {
+    local, kakao, google
 }
