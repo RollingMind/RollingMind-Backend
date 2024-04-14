@@ -29,4 +29,8 @@ public class Participant {
         this.user_id = user_id;
         this.status = status;
     }
+
+    public void update(ParticipantStatus status){
+        this.status = status;
+    }
 }

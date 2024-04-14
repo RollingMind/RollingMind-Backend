@@ -12,4 +12,11 @@ public class GlobalExceptionHandler {
                 .status(ErrorCode.PAST_DATE_SELECTED.getStatus().value())
                 .body(new ErrorDTO(ErrorCode.PAST_DATE_SELECTED));
     }
+
+    @ExceptionHandler({ParticipantNotFoundException.class})
+    protected ResponseEntity handleParticipantNotFoundException(ParticipantNotFoundException ex){
+        return ResponseEntity
+                .status(ErrorCode.PARTICIPANT_NOT_FOUND.getStatus().value())
+                .body(new ErrorDTO(ErrorCode.PARTICIPANT_NOT_FOUND));
+    }
 }

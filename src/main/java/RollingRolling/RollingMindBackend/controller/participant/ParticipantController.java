@@ -1,6 +1,7 @@
 package RollingRolling.RollingMindBackend.controller.participant;
 
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
+import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import RollingRolling.RollingMindBackend.dto.participant.AddParticipantRequest;
 import RollingRolling.RollingMindBackend.service.participant.ParticipantService;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +23,11 @@ public class ParticipantController {
     public ResponseEntity<?> deleteParticipant(@PathVariable Long id){
         participantService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Participant> updateParticipantStatus(@PathVariable Long id, @RequestBody Participant p){
+        Participant participant = participantService.updateStatus(id, p.getStatus());
+        return ResponseEntity.ok().body(participant);
     }
 }

@@ -3,6 +3,8 @@ package RollingRolling.RollingMindBackend.service.participant;
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
 import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import RollingRolling.RollingMindBackend.dto.participant.AddParticipantRequest;
+import RollingRolling.RollingMindBackend.exception.ErrorCode;
+import RollingRolling.RollingMindBackend.exception.ParticipantNotFoundException;
 import RollingRolling.RollingMindBackend.repository.participant.ParticipantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,13 @@ public class ParticipantService {
         return participantRepository.save(participant);
     }
 
+    public Participant updateStatus(Long id, ParticipantStatus status){  //참가자 참여요청 상태 업데이트
+        Participant participant = participantRepository.findById(id)
+                .orElseThrow(() -> new ParticipantNotFoundException(ErrorCode.PARTICIPANT_NOT_FOUND));
+        participant.update(status);
+
+        return participantRepository.save(participant);
+    }
     public void delete(Long id){
         participantRepository.deleteById(id);
     }
