@@ -1,7 +1,6 @@
-package RollingRolling.RollingMindBackend.domain.member;
+package RollingRolling.RollingMindBackend.domain.user;
 
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
