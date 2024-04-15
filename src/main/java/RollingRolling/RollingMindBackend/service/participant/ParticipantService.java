@@ -36,11 +36,11 @@ public class ParticipantService {
         return participantRepository.save(participant);
     }
 
-    public List<Participant> findAllByRoomId(String room_id){
+    public List<Participant> findAllByRoomId(String room_id){  //방 참가자 목록 조회
         return participantRepository.findAllByRoomId(room_id);
     }
 
-    public void delete(Long id){
+    public void delete(Long id){  //방 참가자 삭제
         participantRepository.deleteById(id);
     }
 }
