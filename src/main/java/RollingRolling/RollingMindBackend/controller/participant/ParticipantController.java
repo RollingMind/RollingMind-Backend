@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/participant")
@@ -18,6 +20,10 @@ public class ParticipantController {
     public ResponseEntity<Participant> addParticipant(@RequestBody AddParticipantRequest request){
         Participant addParticipantRequest = participantService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(addParticipantRequest);
+    }
+    @GetMapping("/{room_id}")
+    public ResponseEntity<List<Participant>> findParticipant(@PathVariable String room_id){
+        return ResponseEntity.ok().body(participantService.findAllByRoomId(room_id));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteParticipant(@PathVariable Long id){

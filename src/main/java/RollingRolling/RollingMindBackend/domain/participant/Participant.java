@@ -14,19 +14,19 @@ public class Participant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String room_id;
+    @Column(name = "room_id", nullable = false)
+    private String roomId;
 
-    @Column(nullable = false)
-    private int user_id;
+    @Column(name = "user_id", nullable = false)
+    private int userId;
 
     @Enumerated(EnumType.STRING)
     private ParticipantStatus status;
 
     @Builder
-    public Participant(String room_id, int user_id, ParticipantStatus status){
-        this.room_id = room_id;
-        this.user_id = user_id;
+    public Participant(String roomId, int userId, ParticipantStatus status){
+        this.roomId = roomId;
+        this.userId = userId;
         this.status = status;
     }
 

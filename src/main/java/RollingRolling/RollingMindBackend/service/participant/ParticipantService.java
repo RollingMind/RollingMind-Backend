@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ParticipantService {
@@ -18,8 +20,8 @@ public class ParticipantService {
     @Transactional
     public Participant save(AddParticipantRequest request){  //방 참가자 테이블에 저장
         Participant participant = Participant.builder()
-                .room_id(request.getRoom_id())
-                .user_id(request.getUser_id())
+                .roomId(request.getRoom_id())
+                .userId(request.getUser_id())
                 .status(request.getStatus())
                 .build();
 
@@ -33,6 +35,11 @@ public class ParticipantService {
 
         return participantRepository.save(participant);
     }
+
+    public List<Participant> findAllByRoomId(String room_id){
+        return participantRepository.findAllByRoomId(room_id);
+    }
+
     public void delete(Long id){
         participantRepository.deleteById(id);
     }
