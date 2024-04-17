@@ -10,11 +10,15 @@ import lombok.*;
 @Table(name = "rooms")
 public class Room {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private String room_id;
+    private Long id;
+
+    @Column(nullable = false, name = "room_id")
+    private String roomId;
 
     @Column(nullable = false)
-    private int host_id;
+    private int hostId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -25,9 +29,9 @@ public class Room {
     private RoomParticipantionRequest participation_request;
 
     @Builder
-    public Room(String room_id, int host_id, RoomOpen open, RoomParticipantionRequest participation_request){
-        this.room_id = room_id;
-        this.host_id = host_id;
+    public Room(String roomId, int hostId, RoomOpen open, RoomParticipantionRequest participation_request){
+        this.roomId = roomId;
+        this.hostId = hostId;
         this.open = open;
         this.participation_request = participation_request;
     }

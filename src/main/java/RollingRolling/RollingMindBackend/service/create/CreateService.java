@@ -30,8 +30,8 @@ public class CreateService {
         }
 
         Room room = Room.builder()
-                .room_id(request.getRoom_id())
-                .host_id(request.getHost_id())
+                .roomId(request.getRoom_id())
+                .hostId(request.getHost_id())
                 .open(request.getOpen())
                 .participation_request(request.getParticipation_request())
                 .build();
@@ -53,7 +53,7 @@ public class CreateService {
         String invite_code;
         do {
             invite_code = "3" + RandomStringUtils.randomNumeric(5);  //3XXXXX 초대코드(방 아이디) 생성
-        }while (roomRepository.existsById(invite_code));
+        }while (roomRepository.existsByRoomId(invite_code));
         return invite_code;
     }
 }
