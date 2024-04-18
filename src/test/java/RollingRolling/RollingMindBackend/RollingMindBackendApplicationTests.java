@@ -30,7 +30,7 @@ class RollingMindBackendApplicationTests {
 	@DisplayName("rooms 테이블 데이터 추가")
 	@Test
 	public void insertRoom(){
-		Room newRoom = Room.builder().room_id("311423")
+		Room newRoom = Room.builder().room_id("311424")
 				.host_id(124234)
 				.open("private")
 				.participation_request("n")
