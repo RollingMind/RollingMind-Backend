@@ -4,7 +4,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3305/rollingmind
     username: root
+<<<<<<< HEAD
     password: 1111
+=======
+    password: 0000
+>>>>>>> a9f9912006804a7f0ef5f3f7d05164324e500e8b
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
