@@ -1,5 +1,5 @@
 package RollingRolling.RollingMindBackend.domain.room;
 
-public enum RoomTemplate {
+public enum RoomTemplateType {
     COLOR, IMAGE;
 }
