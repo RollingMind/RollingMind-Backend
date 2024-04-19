@@ -1,12 +1,7 @@
 package RollingRolling.RollingMindBackend.domain.user;
 
-import RollingRolling.RollingMindBackend.dto.create.user.Login;
-import RollingRolling.RollingMindBackend.dto.create.user.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.lang.reflect.Member;
 
 @Entity
 @Table(name="users")
@@ -18,28 +13,35 @@ public class User {
     @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
-    private int member_num;
-    @Column
+
+    @Column(name = "member_num")
+    private long member_num;
+
+    @Column(name = "user_id")
     private String user_id;
-    @Column
+
+    @Column(name = "password")
     private String password;
-    @Column
+
+    @Column(name = "name")
     private String name;
-    @Column
+
+    @Column(name = "nickname")
     private String nickname;
-    @Column
+
+    @Column(name = "email")
     private String email;
+
     @Column(name = "created_date")
     private String created_date;
 
-    @Column
+    @Column(name = "login")
     @Enumerated(EnumType.STRING)
     private Login login;
 
 
     @Builder
-    public User(int member_num, String user_id, String password, String name, String nickname, String email, String created_date, Login login) {
+    public User(long member_num, String user_id, String password, String name, String nickname, String email, String created_date, Login login) {
         this.member_num = member_num;
         this.user_id = user_id;
         this.password = password;
