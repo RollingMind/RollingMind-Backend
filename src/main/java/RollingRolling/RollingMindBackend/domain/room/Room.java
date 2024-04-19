@@ -3,6 +3,8 @@ package RollingRolling.RollingMindBackend.domain.room;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -28,11 +30,25 @@ public class Room {
     @Column(nullable = false)
     private RoomParticipantionRequest participation_request;
 
+    @Column(nullable = false)
+    private String title;
+
+    @Column
+    private LocalDateTime release_date;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RoomTemplate template;
+
+
     @Builder
-    public Room(String roomId, int hostId, RoomOpen open, RoomParticipantionRequest participation_request){
+    public Room(String roomId, int hostId, RoomOpen open, RoomParticipantionRequest participation_request, String title, LocalDateTime release_date, RoomTemplate template){
         this.roomId = roomId;
         this.hostId = hostId;
         this.open = open;
         this.participation_request = participation_request;
+        this.title = title;
+        this.release_date = release_date;
+        this.template = template;
     }
 }

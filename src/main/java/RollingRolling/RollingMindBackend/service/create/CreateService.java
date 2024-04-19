@@ -34,15 +34,15 @@ public class CreateService {
                 .hostId(request.getHost_id())
                 .open(request.getOpen())
                 .participation_request(request.getParticipation_request())
+                .title(request.getTitle())
+                .release_date(request.getRelease_date())
+                .template(request.getTemplate())
                 .build();
         roomRepository.save(room);
 
         PostIt postIt = PostIt.builder()
                 .room_id(request.getRoom_id())
-                .title(request.getTitle())
-                .release_date(request.getRelease_date())
                 .content(request.getContent())
-                .template(request.getTemplate())
                 .build();
         postItRepository.save(postIt);
 

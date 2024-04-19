@@ -2,6 +2,7 @@ package RollingRolling.RollingMindBackend.dto.create;
 
 import RollingRolling.RollingMindBackend.domain.room.RoomOpen;
 import RollingRolling.RollingMindBackend.domain.room.RoomParticipantionRequest;
+import RollingRolling.RollingMindBackend.domain.room.RoomTemplate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,6 @@ public class AddCreateRequest {
     private RoomParticipantionRequest participation_request;
     private String title;
     private LocalDateTime release_date;
+    private RoomTemplate template;
     private String content;
-    private String template;
 }
