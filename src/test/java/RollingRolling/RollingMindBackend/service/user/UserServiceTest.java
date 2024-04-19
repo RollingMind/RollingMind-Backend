@@ -14,7 +14,6 @@ import org.springframework.test.context.TestPropertySource;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
 @TestPropertySource(locations = "classpath:application.properties")
 class UserServiceTest {
 
