@@ -19,12 +19,16 @@ public class PostIt {
     @Column(nullable = false)
     private String room_id;
 
+    @Column(nullable = false)
+    private String nickname;
+
     @Column
     private String content;
 
     @Builder
-    public PostIt(String room_id, String content){
+    public PostIt(String room_id, String nickname, String content){
         this.room_id = room_id;
+        this.nickname = nickname;
         this.content = content;
     }
 
