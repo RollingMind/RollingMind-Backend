@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TemplateLikesRepository extends JpaRepository<TemplateLikes, Long> {
-    @Query("SELECT tl.template FROM TemplateLikes tl WHERE tl.memberNum = :memberNum")
-    List<Template> findTemplatesByMemberNum(int memberNum);
+    @Query("SELECT tl.templateId FROM TemplateLikes tl WHERE tl.memberNum = :memberNum")
+    List<Long> findTemplateIdsByMemberNum(int memberNum);
 }

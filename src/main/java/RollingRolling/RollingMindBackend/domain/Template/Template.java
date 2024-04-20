@@ -14,6 +14,9 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "templateId")
+    private int templateId;
+
     @Column(name = "optionValue", nullable = false)
     private String optionValue;
 
@@ -22,7 +25,8 @@ public class Template {
 
 
     @Builder
-    public Template(String optionValue, String hashtag) {
+    public Template(int templateId, String optionValue, String hashtag) {
+        this.templateId = templateId;
         this.optionValue = optionValue;
         this.hashtag = hashtag;
     }
