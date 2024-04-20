@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class PostitRequest {
-    private String room_id;
+    private String roomId;
     private String nickname;
     private String context;
 

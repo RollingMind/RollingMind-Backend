@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class AddParticipantRequest {
-    private String room_id;
-    private int member_num;
+    private String roomId;
+    private int memberNum;
     private ParticipantStatus status;
 }

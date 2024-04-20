@@ -16,24 +16,24 @@ public class Participant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "room_id", nullable = false)
+    @Column(name = "roomId", nullable = false)
     private String roomId;
 
-    @Column(name = "member_num", nullable = false)
-    private int member_num;
+    @Column(name = "memberNum", nullable = false)
+    private int memberNum;
 
     @Enumerated(EnumType.STRING)
     private ParticipantStatus status;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "room_id", insertable=false, updatable=false)
+    @JoinColumn(name = "roomId", insertable=false, updatable=false)
     private Room room;
 
     @Builder
-    public Participant(String roomId, int member_num, ParticipantStatus status){
+    public Participant(String roomId, int memberNum, ParticipantStatus status){
         this.roomId = roomId;
-        this.member_num = member_num;
+        this.memberNum = memberNum;
         this.status = status;
     }
 

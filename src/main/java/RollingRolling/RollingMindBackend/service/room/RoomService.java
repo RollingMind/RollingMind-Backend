@@ -21,21 +21,21 @@ public class RoomService {
     @Transactional
     public AddRoomRequest save(AddRoomRequest request){  //방 테이블에 저장
         //공개 날짜 체크
-        if(request.getRelease_date() != null){
-            LocalDateTime release_date = LocalDateTime.parse(String.valueOf(request.getRelease_date()));
+        if(request.getReleaseDate() != null){
+            LocalDateTime release_date = LocalDateTime.parse(String.valueOf(request.getReleaseDate()));
             if(release_date.isBefore(LocalDateTime.now())){
                 throw new PastReleaseDateException(ErrorCode.PAST_DATE_SELECTED);
             }
         }
 
         Room room = Room.builder()
-                .roomId(request.getRoom_id())
-                .hostId(request.getHost_id())
+                .roomId(request.getRoomId())
+                .hostId(request.getHostId())
                 .open(request.getOpen())
-                .participation_request(request.getParticipation_request())
+                .participationRequest(request.getParticipationRequest())
                 .title(request.getTitle())
-                .release_date(request.getRelease_date())
-                .template_type(request.getTemplate_type())
+                .releaseDate(request.getReleaseDate())
+                .templateType(request.getTemplateType())
                 .build();
         roomRepository.save(room);
 

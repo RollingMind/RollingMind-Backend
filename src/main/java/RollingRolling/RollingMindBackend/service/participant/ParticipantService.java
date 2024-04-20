@@ -20,8 +20,8 @@ public class ParticipantService {
     @Transactional
     public Participant save(AddParticipantRequest request){  //방 참가자 테이블에 저장
         Participant participant = Participant.builder()
-                .roomId(request.getRoom_id())
-                .member_num(request.getMember_num())
+                .roomId(request.getRoomId())
+                .memberNum(request.getMemberNum())
                 .status(request.getStatus())
                 .build();
 
@@ -36,8 +36,8 @@ public class ParticipantService {
         return participantRepository.save(participant);
     }
 
-    public List<Participant> findAllByRoomIdAndStatus(String room_id){  //방 참가자 목록 조회
-        return participantRepository.findAllByRoomIdAndStatus(room_id, ParticipantStatus.ACCEPT);
+    public List<Participant> findAllByRoomIdAndStatus(String roomId){  //방 참가자 목록 조회
+        return participantRepository.findAllByRoomIdAndStatus(roomId, ParticipantStatus.ACCEPT);
     }
 
     public void delete(Long id){  //방 참가자 삭제
