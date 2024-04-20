@@ -21,7 +21,7 @@ public class ParticipantService {
     public Participant save(AddParticipantRequest request){  //방 참가자 테이블에 저장
         Participant participant = Participant.builder()
                 .roomId(request.getRoom_id())
-                .userId(request.getUser_id())
+                .member_num(request.getMember_num())
                 .status(request.getStatus())
                 .build();
 
@@ -36,8 +36,8 @@ public class ParticipantService {
         return participantRepository.save(participant);
     }
 
-    public List<Participant> findAllByRoomId(String room_id){  //방 참가자 목록 조회
-        return participantRepository.findAllByRoomId(room_id);
+    public List<Participant> findAllByRoomIdAndStatus(String room_id){  //방 참가자 목록 조회
+        return participantRepository.findAllByRoomIdAndStatus(room_id, ParticipantStatus.ACCEPT);
     }
 
     public void delete(Long id){  //방 참가자 삭제

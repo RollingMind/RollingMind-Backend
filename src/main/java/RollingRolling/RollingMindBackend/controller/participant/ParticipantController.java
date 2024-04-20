@@ -23,7 +23,7 @@ public class ParticipantController {
     }
     @GetMapping("/{room_id}")  //특정 방의 참가자 목록 조회
     public ResponseEntity<List<Participant>> findParticipant(@PathVariable String room_id){
-        return ResponseEntity.ok().body(participantService.findAllByRoomId(room_id));
+        return ResponseEntity.ok().body(participantService.findAllByRoomIdAndStatus(room_id));
     }
     @DeleteMapping("/{id}")  //참가자 삭제
     public ResponseEntity<?> deleteParticipant(@PathVariable Long id){
