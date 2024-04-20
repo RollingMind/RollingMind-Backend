@@ -13,11 +13,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "member_num")
-    private long member_num;
+    @Column(name = "memberNum")
+    private int memberNum;
 
-    @Column(name = "user_id")
-    private String user_id;
+    @Column(name = "userId")
+    private String userId;
 
     @Column(name = "password")
     private String password;
@@ -31,8 +31,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "created_date")
-    private String created_date;
+    @Column(name = "createdDate")
+    private String createdDate;
 
     @Column(name = "login")
     @Enumerated(EnumType.STRING)
@@ -40,14 +40,14 @@ public class User {
 
 
     @Builder
-    public User(long member_num, String user_id, String password, String name, String nickname, String email, String created_date, Login login) {
-        this.member_num = member_num;
-        this.user_id = user_id;
+    public User(int memberNum, String userId, String password, String name, String nickname, String email, String createdDate, Login login) {
+        this.memberNum = memberNum;
+        this.userId = userId;
         this.password = password;
         this.name = name;
         this.nickname = nickname;
         this.email = email;
-        this.created_date = created_date;
+        this.createdDate = createdDate;
         this.login = login;
     }
 }
