@@ -14,24 +14,20 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Template_id", nullable = false)
-    private int Template_id;
-
     @Column(name = "option_value", nullable = false)
     private String option_value;
 
     @Column(name = "hashtag", nullable = false)
     private String hashtag;
 
+
     @Builder
-    public Template(int Template_id, String option_value, String hashtag) {
-        this.Template_id = Template_id;
+    public Template(String option_value, String hashtag) {
         this.option_value = option_value;
         this.hashtag = hashtag;
     }
 
-    public void update(int Template_id, String option_value, String hashtag) {
-        this.Template_id = Template_id;
+    public void update(String option_value, String hashtag) {
         this.option_value = option_value;
         this.hashtag = hashtag;
     }

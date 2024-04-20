@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class AddRoomRequest {
-    private String room_id;
-    private int host_id;
+    private String roomId;
+    private int hostId;
     private RoomOpen open;
-    private RoomParticipantionRequest participation_request;
+    private RoomParticipantionRequest participationRequest;
     private String title;
-    private LocalDateTime release_date;
-    private RoomTemplateType template_type;
+    private LocalDateTime releaseDate;
+    private RoomTemplateType templateType;
 }

@@ -20,10 +20,10 @@ public class Room {
     @Column(nullable = false)
     private Long id;
 
-    @Column(nullable = false, name = "room_id")
+    @Column(nullable = false, name = "roomId")
     private String roomId;
 
-    @Column(nullable = false, name = "host_id")
+    @Column(nullable = false, name = "hostId")
     private int hostId;
 
     @Enumerated(EnumType.STRING)
@@ -32,30 +32,30 @@ public class Room {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RoomParticipantionRequest participation_request;
+    private RoomParticipantionRequest participationRequest;
 
     @Column(nullable = false)
     private String title;
 
     @Column
-    private LocalDateTime release_date;
+    private LocalDateTime releaseDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RoomTemplateType template_type;
+    private RoomTemplateType templateType;
 
     @JsonIgnore
     @OneToMany(mappedBy = "room")
     private List<Participant> participantList;
 
     @Builder
-    public Room(String roomId, int hostId, RoomOpen open, RoomParticipantionRequest participation_request, String title, LocalDateTime release_date, RoomTemplateType template_type){
+    public Room(String roomId, int hostId, RoomOpen open, RoomParticipantionRequest participationRequest, String title, LocalDateTime releaseDate, RoomTemplateType templateType){
         this.roomId = roomId;
         this.hostId = hostId;
         this.open = open;
-        this.participation_request = participation_request;
+        this.participationRequest = participationRequest;
         this.title = title;
-        this.release_date = release_date;
-        this.template_type = template_type;
+        this.releaseDate = releaseDate;
+        this.templateType = templateType;
     }
 }
