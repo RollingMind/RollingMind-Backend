@@ -5,12 +5,16 @@ spring:
     url: jdbc:mysql://localhost:3305/rollingmind
     username: root
     password: 1111
-  jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
       ddl-auto: update
     properties:
+
       hibernate:
         format_sql: true
+
+
+
+
