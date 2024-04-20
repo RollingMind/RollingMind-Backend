@@ -1,6 +1,8 @@
 package RollingRolling.RollingMindBackend.controller.hotrollingpaper;
 
 import RollingRolling.RollingMindBackend.domain.room.Room;
+import RollingRolling.RollingMindBackend.dto.room.RoomResponse;
+import RollingRolling.RollingMindBackend.repository.room.RoomRepository;
 import RollingRolling.RollingMindBackend.service.hotrollingpaper.HotRollingPaperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ public class HotRollingPaperController {
     private final HotRollingPaperService hotRollingPaperService;
 
     @GetMapping
-    public ResponseEntity<List<Room>> findHotRollingPaper(){  //지금 핫한 롤링페이퍼 목록 조회
+    public ResponseEntity<List<RoomResponse>> findHotRollingPaper(){  //지금 핫한 롤링페이퍼 목록 조회
         return ResponseEntity.ok().body(hotRollingPaperService.findAllRoomsOrderByParticipantsDesc());
     }
 }
