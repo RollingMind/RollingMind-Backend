@@ -23,8 +23,8 @@ public class TemplateLikes {
     private Template template;
 
     @Builder
-    public TemplateLikes(int member_num, Template template){
-        this.memberNum = member_num;
+    public TemplateLikes(int memberNum, Template template){
+        this.memberNum = memberNum;
         this.template = template;
     }
 }
