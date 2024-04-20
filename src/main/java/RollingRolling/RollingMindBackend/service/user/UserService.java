@@ -2,20 +2,23 @@ package RollingRolling.RollingMindBackend.service.user;
 
 
 import RollingRolling.RollingMindBackend.domain.user.User;
-import RollingRolling.RollingMindBackend.dto.create.user.UserDto;
 import RollingRolling.RollingMindBackend.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
 public class UserService {
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     private  final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
 
@@ -24,7 +27,7 @@ public class UserService {
         User user = User.builder()
                 .member_num(userDto.getMember_num())
                 .user_id(userDto.getUser_id())
-                .password(userDto.getPassword())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .name(userDto.getName())
                 .nickname(userDto.getNickname())
                 .email(userDto.getEmail())
@@ -36,6 +39,4 @@ public class UserService {
 
         return user;
     }
-
-
 }
