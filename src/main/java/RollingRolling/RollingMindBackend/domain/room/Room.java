@@ -1,9 +1,12 @@
 package RollingRolling.RollingMindBackend.domain.room;
 
+import RollingRolling.RollingMindBackend.domain.postit.PostIt;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,7 +42,6 @@ public class Room {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RoomTemplateType template_type;
-
 
     @Builder
     public Room(String roomId, int hostId, RoomOpen open, RoomParticipantionRequest participation_request, String title, LocalDateTime release_date, RoomTemplateType template_type){
