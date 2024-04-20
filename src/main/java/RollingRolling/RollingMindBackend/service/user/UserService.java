@@ -26,16 +26,26 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    // 회원 번호 생성
+    public int generateMemberNum(){
+        Random random = new Random();
+        int memberNum;
+        do {
+            memberNum = random.nextInt(100000) + 99999;
+        }while (userRepository.existsById(memberNum));
+        return memberNum;
+    }
+
 
     public User save(User userDto){
         User user = User.builder()
-                .member_num(userDto.getMember_num())
-                .user_id(userDto.getUser_id())
+                .memberNum(userDto.getMemberNum())
+                .userId(userDto.getUserId())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .name(userDto.getName())
                 .nickname(userDto.getNickname())
                 .email(userDto.getEmail())
-                .created_date(userDto.getCreated_date())
+                .createdDate(userDto.getCreatedDate())
                 .login(userDto.getLogin())
                 .build();
 
@@ -44,13 +54,5 @@ public class UserService {
         return user;
     }
 
-    // 회원 번호 생성
-    public Long generateMemberNum(){
-        Random random = new Random();
-        Long member_num;
-        do {
-            member_num = random.nextLong(100000) + 99999;
-        }while (userRepository.existsById(member_num));
-        return member_num;
-    }
+
 }

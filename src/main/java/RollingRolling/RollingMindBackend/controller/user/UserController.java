@@ -17,8 +17,10 @@ public class UserController {
     // 회원번호 생성
     @GetMapping
     public ResponseEntity<?> createMemberNum(){
-        Long member_num = userService.generateMemberNum();
-        return ResponseEntity.ok().body(Map.of("member_num", member_num));
+        int memberNum = userService.generateMemberNum();
+        return ResponseEntity.ok().body(Map.of("memberNum", memberNum));
     }
+
+
 
 }
