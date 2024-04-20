@@ -2,13 +2,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/rollingmind
+    url: jdbc:mysql://localhost:3305/rollingmind
     username: root
-<<<<<<< HEAD
     password: 1111
-=======
-    password: 2323
->>>>>>> 261b211dc482666c7605a8f4248da6a0687deae9
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -16,10 +12,5 @@ spring:
     hibernate:
       ddl-auto: update
     properties:
-
       hibernate:
         format_sql: true
-
-
-
-
