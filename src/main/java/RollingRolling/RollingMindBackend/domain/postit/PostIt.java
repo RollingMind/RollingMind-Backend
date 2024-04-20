@@ -1,5 +1,6 @@
 package RollingRolling.RollingMindBackend.domain.postit;
 
+import RollingRolling.RollingMindBackend.domain.room.Room;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,34 +17,22 @@ public class PostIt {
     @Column(nullable = false)
     private Long id;
 
-    @Column(nullable = false)
-    private String room_id;
+    private String roomId;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column
-    private LocalDateTime release_date;
+    private String nickname;
 
     @Column
     private String content;
 
-    @Column(nullable = false)
-    private String template;
-
     @Builder
-    public PostIt(String room_id, String title, LocalDateTime release_date, String content, String template){
-        this.room_id = room_id;
-        this.title = title;
-        this.release_date = release_date;
+    public PostIt(String roomId, String nickname, String content){
+        this.roomId = roomId;
+        this.nickname = nickname;
         this.content = content;
-        this.template = template;
     }
 
-    public void update(String title, LocalDateTime release_date, String content, String template){
-        this.title = title;
-        this.release_date = release_date;
+    public void update(String content){
         this.content = content;
-        this.template = template;
     }
 }

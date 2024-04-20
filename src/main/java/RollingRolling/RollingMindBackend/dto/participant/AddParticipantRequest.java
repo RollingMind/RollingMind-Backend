@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class AddParticipantRequest {
     private String room_id;
-    private int user_id;
+    private int member_num;
     private ParticipantStatus status;
 }
