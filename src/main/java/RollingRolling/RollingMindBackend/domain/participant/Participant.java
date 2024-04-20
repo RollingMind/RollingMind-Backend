@@ -1,5 +1,7 @@
 package RollingRolling.RollingMindBackend.domain.participant;
 
+import RollingRolling.RollingMindBackend.domain.room.Room;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +24,11 @@ public class Participant {
 
     @Enumerated(EnumType.STRING)
     private ParticipantStatus status;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "room_id", insertable=false, updatable=false)
+    private Room room;
 
     @Builder
     public Participant(String roomId, int member_num, ParticipantStatus status){

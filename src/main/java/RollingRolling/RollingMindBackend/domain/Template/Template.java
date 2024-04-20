@@ -1,9 +1,6 @@
 package RollingRolling.RollingMindBackend.domain.Template;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -12,21 +9,30 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "template")
 public class Template {
-    @Id
-    @Column(nullable = false)
-    private String image_path;
 
-    @Column(nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "Template_id", nullable = false)
+    private int Template_id;
+
+    @Column(name = "option_value", nullable = false)
+    private String option_value;
+
+    @Column(name = "hashtag", nullable = false)
     private String hashtag;
 
     @Builder
-    public Template(String image_path, String hashtag) {
-        this.image_path = image_path;
+    public Template(int Template_id, String option_value, String hashtag) {
+        this.Template_id = Template_id;
+        this.option_value = option_value;
         this.hashtag = hashtag;
     }
 
-    public void update(String image_path, String hashtag) {
-        this.image_path = image_path;
+    public void update(int Template_id, String option_value, String hashtag) {
+        this.Template_id = Template_id;
+        this.option_value = option_value;
         this.hashtag = hashtag;
     }
 }
