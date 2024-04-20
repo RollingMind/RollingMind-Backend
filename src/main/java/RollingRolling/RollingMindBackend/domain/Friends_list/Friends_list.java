@@ -19,7 +19,7 @@ public class Friends_list {
     @Column(name = "to_user", nullable = false)
     private int to_user;
 
-    @Column(name = "from_uesr", nullable = false)
+    @Column(name = "from_user", nullable = false)
     private int from_user;
 
     @Column(name = "are_we_friend", nullable = false)
