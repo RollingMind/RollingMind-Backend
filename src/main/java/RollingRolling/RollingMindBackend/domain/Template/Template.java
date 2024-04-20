@@ -17,22 +17,22 @@ public class Template {
     @Column(name = "Template_id", nullable = false)
     private int Template_id;
 
-    @Column(name = "image_path", nullable = false)
-    private String image_path;
+    @Column(name = "option_value", nullable = false)
+    private String option_value;
 
     @Column(name = "hashtag", nullable = false)
     private String hashtag;
 
     @Builder
-    public Template(int Template_id, String image_path, String hashtag) {
+    public Template(int Template_id, String option_value, String hashtag) {
         this.Template_id = Template_id;
-        this.image_path = image_path;
+        this.option_value = option_value;
         this.hashtag = hashtag;
     }
 
-    public void update(int Template_id, String image_path, String hashtag) {
+    public void update(int Template_id, String option_value, String hashtag) {
         this.Template_id = Template_id;
-        this.image_path = image_path;
+        this.option_value = option_value;
         this.hashtag = hashtag;
     }
 }
