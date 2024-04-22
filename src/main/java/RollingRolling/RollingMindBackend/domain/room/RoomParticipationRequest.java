@@ -1,5 +1,5 @@
 package RollingRolling.RollingMindBackend.domain.room;
 
-public enum RoomParticipantionRequest {
+public enum RoomParticipationRequest {
     Y, N;
 }

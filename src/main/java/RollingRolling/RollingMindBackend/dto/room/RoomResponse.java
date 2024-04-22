@@ -2,7 +2,7 @@ package RollingRolling.RollingMindBackend.dto.room;
 
 import RollingRolling.RollingMindBackend.domain.room.Room;
 import RollingRolling.RollingMindBackend.domain.room.RoomOpen;
-import RollingRolling.RollingMindBackend.domain.room.RoomParticipantionRequest;
+import RollingRolling.RollingMindBackend.domain.room.RoomParticipationRequest;
 import RollingRolling.RollingMindBackend.domain.room.RoomTemplateType;
 import lombok.Getter;
 
@@ -14,7 +14,7 @@ public class RoomResponse {
     private String roomId;
     private int hostId;
     private RoomOpen open;
-    private RoomParticipantionRequest participantRequest;
+    private RoomParticipationRequest participantRequest;
     private String title;
     private LocalDateTime releaseDate;
     private RoomTemplateType templateType;
