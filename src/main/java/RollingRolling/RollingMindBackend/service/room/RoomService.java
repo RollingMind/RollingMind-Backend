@@ -36,6 +36,7 @@ public class RoomService {
                 .title(request.getTitle())
                 .releaseDate(request.getReleaseDate())
                 .templateType(request.getTemplateType())
+                .templateId(request.getTemplateId())
                 .build();
         roomRepository.save(room);
 
