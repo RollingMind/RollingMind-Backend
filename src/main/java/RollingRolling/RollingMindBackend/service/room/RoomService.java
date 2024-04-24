@@ -5,7 +5,9 @@ import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import RollingRolling.RollingMindBackend.domain.room.Room;
 import RollingRolling.RollingMindBackend.dto.room.AddRoomRequest;
 import RollingRolling.RollingMindBackend.exception.ErrorCode;
+import RollingRolling.RollingMindBackend.exception.ParticipantNotFoundException;
 import RollingRolling.RollingMindBackend.exception.PastReleaseDateException;
+import RollingRolling.RollingMindBackend.exception.RoomNotFoundException;
 import RollingRolling.RollingMindBackend.repository.participant.ParticipantRepository;
 import RollingRolling.RollingMindBackend.repository.postit.PostItRepository;
 import RollingRolling.RollingMindBackend.repository.room.RoomRepository;
@@ -63,6 +65,10 @@ public class RoomService {
         List<Room> roomList1 = roomRepository.findAllByRoomIdIn(roomIdList);  //참가한 방 리스트
         List<Room> roomList2 = roomRepository.findAllByHostId(memberNum);  //방장인 방 리스트
         roomList1.addAll(roomList2);
+
+        if(roomList1.isEmpty()){  //없는 경우
+            throw new RoomNotFoundException(ErrorCode.ROOM_NOT_FOUND);
+        }
         return roomList1;
     }
 }
