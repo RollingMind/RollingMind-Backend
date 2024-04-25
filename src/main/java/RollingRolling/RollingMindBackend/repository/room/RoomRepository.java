@@ -14,4 +14,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Object[]> findAllRoomsWithParticipantsCount();
     List<Room> findAllByHostId(int memberNum);
     List<Room> findAllByRoomIdIn(List<String> roomIds);
+    List<Room> findByTitleContaining(String keyword);
 }
