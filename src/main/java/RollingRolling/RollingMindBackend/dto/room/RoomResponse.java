@@ -25,10 +25,10 @@ public class RoomResponse {
         this.roomId = room.getRoomId();
         this.hostId = room.getHostId();
         this.open = room.getOpen();
-        this.participantRequest = room.getParticipation_request();
+        this.participantRequest = room.getParticipationRequest();
         this.title = room.getTitle();
-        this.releaseDate = room.getRelease_date();
-        this.templateType = room.getTemplate_type();
+        this.releaseDate = room.getReleaseDate();
+        this.templateType = room.getTemplateType();
         this.participantsCount = (int)participantsCount;
     }
 }

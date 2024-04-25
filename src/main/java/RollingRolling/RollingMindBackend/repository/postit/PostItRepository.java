@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PostItRepository extends JpaRepository<PostIt, Long> {
-    List<PostIt> findByRoomId(String room_id);
+    List<PostIt> findByRoomId(String roomId);
 }

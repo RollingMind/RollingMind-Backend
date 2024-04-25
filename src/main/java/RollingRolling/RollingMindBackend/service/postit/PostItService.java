@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostItService {
     private final PostItRepository postItRepository;
-    public List<PostIt> findByRoomId(String room_id){
-        return postItRepository.findByRoomId(room_id);
+    public List<PostIt> findByRoomId(String roomId){
+        return postItRepository.findByRoomId(roomId);
     }
 }
