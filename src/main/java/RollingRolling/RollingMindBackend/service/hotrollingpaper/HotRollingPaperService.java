@@ -20,4 +20,8 @@ public class HotRollingPaperService {
                 .map(result -> new RoomResponse((Room) result[0], (Long) result[1]))
                 .collect(Collectors.toList());
     }
+
+    public List<Room> searchRoomsByTitle(String keyword){  //제목으로 롤링페이퍼 방 검색
+        return roomRepository.findByTitleContaining(keyword);
+    }
 }
