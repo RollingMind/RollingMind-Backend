@@ -15,6 +15,7 @@ class UserServiceTest {
     @Autowired
     UserService userService;
 
+
     @Test
     @DisplayName("회원가입 테스트")
     public void saveUserTest() {
@@ -28,7 +29,7 @@ class UserServiceTest {
                 .createdDate("2024-04-18 19:29:10")
                 .login(Login.KAKAO)
                 .build();
-        System.out.println(user.getMemberNum());
+
         userService.save(user);
     }
 
