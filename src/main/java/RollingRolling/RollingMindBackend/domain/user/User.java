@@ -2,6 +2,7 @@ package RollingRolling.RollingMindBackend.domain.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="Users")

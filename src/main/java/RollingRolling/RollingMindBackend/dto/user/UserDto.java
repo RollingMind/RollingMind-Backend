@@ -2,6 +2,7 @@ package RollingRolling.RollingMindBackend.dto.user;
 
 import RollingRolling.RollingMindBackend.domain.user.Login;
 import RollingRolling.RollingMindBackend.domain.user.User;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -13,8 +14,10 @@ import org.hibernate.annotations.CreationTimestamp;
 @AllArgsConstructor
 @Builder
 public class UserDto {
+    @Id
     private long id;
     private int memberNum;
+
 
     @NotBlank(message = "아이디를 입력해 주세요.")
     @Size(min = 2, max = 10, message = "아이디는 2자 이상 10자 이하로 입력해 주세요")
