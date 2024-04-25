@@ -28,7 +28,8 @@ public class UserService {
     @Autowired
     private  final UserRepository userRepository;
 
-
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public boolean existsByUserId(String userId){
@@ -57,7 +58,7 @@ public class UserService {
         User user = User.builder()
                 .memberNum(generateMemberNum())
                 .userId(userDto.getUserId())
-                .password(userDto.getPassword())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .name(userDto.getName())
                 .nickname(userDto.getNickname())
                 .email(userDto.getEmail())

@@ -26,7 +26,7 @@ public class UserController {
 
 
     // 아이디 중복 처리
-    @GetMapping("/{userId}")
+    @GetMapping("/idCheck")
     public ResponseEntity<?> checkUserIdDuplicate(@RequestParam(value = "userId") String userId) throws BadRequestException{
         if(userService.existsByUserId(userId)==true){
             throw new BadRequestException("이미 사용 중인 아이디 입니다.");
