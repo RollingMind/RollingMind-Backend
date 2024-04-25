@@ -19,4 +19,11 @@ public class GlobalExceptionHandler {
                 .status(ErrorCode.PARTICIPANT_NOT_FOUND.getStatus().value())
                 .body(new ErrorDTO(ErrorCode.PARTICIPANT_NOT_FOUND));
     }
+
+    @ExceptionHandler({RoomNotFoundException.class})
+    protected ResponseEntity handleRoomNotFoundException(RoomNotFoundException ex){
+        return ResponseEntity
+                .status(ErrorCode.ROOM_NOT_FOUND.getStatus().value())
+                .body(new ErrorDTO(ErrorCode.ROOM_NOT_FOUND));
+    }
 }

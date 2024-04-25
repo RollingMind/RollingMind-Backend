@@ -18,13 +18,17 @@ public class TemplateLikes {
     @Column(nullable = false, name = "memberNum")
     private int memberNum;
 
+    @Column(name = "templateId")
+    private int templateId;
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "templateId")
+    @JoinColumn(name = "templateId", insertable=false, updatable=false)
     private Template template;
 
     @Builder
-    public TemplateLikes(int member_num, Template template){
-        this.memberNum = member_num;
-        this.template = template;
+    public TemplateLikes(int memberNum, int templateId){
+        this.memberNum = memberNum;
+        this.templateId = templateId;
     }
 }

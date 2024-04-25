@@ -1,6 +1,7 @@
 package RollingRolling.RollingMindBackend.controller.template;
 
 import RollingRolling.RollingMindBackend.domain.Template.Template;
+import RollingRolling.RollingMindBackend.dto.Template.TemplateResponse;
 import RollingRolling.RollingMindBackend.service.template.TemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class TemplateController {
     private final TemplateService templateService;
 
     @GetMapping("/{memberNum}")
-    public ResponseEntity<List<Template>> findTemplateLikes(@PathVariable int memberNum){
+    public ResponseEntity<List<TemplateResponse>> findTemplateLikes(@PathVariable int memberNum){
         return ResponseEntity.ok().body(templateService.findTemplatesByMemberNum(memberNum));
     }
 }

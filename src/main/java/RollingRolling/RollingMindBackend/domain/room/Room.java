@@ -1,7 +1,6 @@
 package RollingRolling.RollingMindBackend.domain.room;
 
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
-import RollingRolling.RollingMindBackend.domain.postit.PostIt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,7 +31,7 @@ public class Room {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RoomParticipantionRequest participationRequest;
+    private RoomParticipationRequest participationRequest;
 
     @Column(nullable = false)
     private String title;
@@ -44,12 +43,15 @@ public class Room {
     @Column(nullable = false)
     private RoomTemplateType templateType;
 
+    @Column(nullable = false)
+    private int templateId;
+
     @JsonIgnore
     @OneToMany(mappedBy = "room")
     private List<Participant> participantList;
 
     @Builder
-    public Room(String roomId, int hostId, RoomOpen open, RoomParticipantionRequest participationRequest, String title, LocalDateTime releaseDate, RoomTemplateType templateType){
+    public Room(String roomId, int hostId, RoomOpen open, RoomParticipationRequest participationRequest, String title, LocalDateTime releaseDate, RoomTemplateType templateType, int templateId){
         this.roomId = roomId;
         this.hostId = hostId;
         this.open = open;
@@ -57,5 +59,6 @@ public class Room {
         this.title = title;
         this.releaseDate = releaseDate;
         this.templateType = templateType;
+        this.templateId = templateId;
     }
 }
