@@ -23,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,6 +67,14 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody LoginRequest Request) {
         Login login = userService.login(Request);
         return ResponseEntity.status(HttpStatus.CREATED).body(login);
+    }
+
+    //로그아웃
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpSession session){
+        session.invalidate();
+        ModelAndView mv = new ModelAndView("redirect:/");
+        return mv;
     }
 
     // 중복 처리
