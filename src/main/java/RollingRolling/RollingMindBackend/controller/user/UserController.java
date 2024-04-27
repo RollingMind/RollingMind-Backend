@@ -2,6 +2,7 @@ package RollingRolling.RollingMindBackend.controller.user;
 
 
 import RollingRolling.RollingMindBackend.service.user.UserService;
+import RollingRolling.RollingMindBackend.validator.CheckNicknameValidator;
 import RollingRolling.RollingMindBackend.validator.CheckUserIdValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class UserController {
     @Autowired
     private final CheckUserIdValidator checkUserIdValidator;
     @Autowired
+    private final CheckNicknameValidator checkNicknameValidator;
+    @Autowired
     private final UserService userService;
 
 
@@ -27,6 +30,7 @@ public class UserController {
     @InitBinder
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkUserIdValidator);
+        binder.addValidators(checkNicknameValidator);
     }
 
     // 회원번호 생성
@@ -38,9 +42,14 @@ public class UserController {
 
 
     // 아이디 중복 처리
-    @GetMapping("/exists/{username}")
-    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String username){
-        return ResponseEntity.ok(userService.checkUserIdDuplication(username));
+    @GetMapping("/exists/{userId}")
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
+        return ResponseEntity.ok(userService.checkUserIdDuplication(userId));
+    }
+
+    @GetMapping("/exists/{nickname}")
+    public ResponseEntity<Boolean> checkNicknameDuplicate(@PathVariable String nickname){
+        return ResponseEntity.ok(userService.checkUserIdDuplication(nickname));
     }
 
 
