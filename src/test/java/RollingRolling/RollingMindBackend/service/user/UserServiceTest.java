@@ -27,7 +27,7 @@ class UserServiceTest {
                 .nickname("동동이")
                 .email("test@email.com")
                 .createdDate("2024-04-18 19:29:10")
-                .login(Login.KAKAO)
+                .login(Login.LOCAL)
                 .build();
 
         userService.save(user);

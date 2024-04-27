@@ -10,11 +10,8 @@ import java.util.List;
 
 @Repository
 @EnableJpaRepositories
-public interface UserRepository extends JpaRepository<User, Integer>{
-    boolean existsByEmail(String email);
-
-    //boolean existsById(String userId);
-
+public interface UserRepository extends JpaRepository<User, String>{
+    boolean existsByMemberNum(int memberNum);
     boolean existsByUserId(String userId);
 
     List<User> findAllByMemberNumIn(List<Integer> memberNums);

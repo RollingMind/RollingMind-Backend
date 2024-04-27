@@ -1,6 +1,7 @@
 package RollingRolling.RollingMindBackend.service.user;
 
 
+import RollingRolling.RollingMindBackend.controller.user.UserController;
 import RollingRolling.RollingMindBackend.domain.user.User;
 import RollingRolling.RollingMindBackend.dto.user.UserDto;
 import RollingRolling.RollingMindBackend.repository.user.UserRepository;
@@ -13,7 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Random;
+
+import static java.time.LocalTime.now;
 
 @Service
 @Component
@@ -22,6 +28,9 @@ public class UserService {
 
     @Autowired
     private  final UserRepository userRepository;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
 
     @Transactional
@@ -35,21 +44,27 @@ public class UserService {
         int memberNum;
         do {
             memberNum = random.nextInt(100000) + 99999;
-        }while (userRepository.existsById(memberNum));
+        }while (userRepository.existsByMemberNum(memberNum));
         return memberNum;
+    }
+
+    // 중복 처리
+    public boolean checkUserIdDuplication(String userId){
+        return userRepository.existsByUserId(userId);
     }
 
 
     // 회원 정보 입력
     public User save(User userDto){
+        LocalDateTime now = LocalDateTime.now();
         User user = User.builder()
                 .memberNum(generateMemberNum())
                 .userId(userDto.getUserId())
-                .password(userDto.getPassword())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .name(userDto.getName())
                 .nickname(userDto.getNickname())
                 .email(userDto.getEmail())
-                .createdDate(userDto.getCreatedDate())
+                .createdDate(String.valueOf(now))
                 .login(userDto.getLogin())
                 .build();
 
