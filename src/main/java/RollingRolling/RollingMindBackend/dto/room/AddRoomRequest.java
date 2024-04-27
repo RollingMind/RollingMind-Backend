@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +22,5 @@ public class AddRoomRequest {
     private LocalDateTime releaseDate;
     private RoomTemplateType templateType;
     private int templateId;
+    private List<Integer> participantList;
 }
