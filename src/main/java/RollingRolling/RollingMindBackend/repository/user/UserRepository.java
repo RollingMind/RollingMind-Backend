@@ -13,6 +13,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, String>{
     boolean existsByMemberNum(int memberNum);
     boolean existsByUserId(String userId);
+    boolean existsByNickname(String nickname);
 
     List<User> findAllByMemberNumIn(List<Integer> memberNums);
 }
