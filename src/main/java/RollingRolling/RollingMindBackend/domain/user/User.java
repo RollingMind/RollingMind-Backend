@@ -1,12 +1,7 @@
 package RollingRolling.RollingMindBackend.domain.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="Users")
@@ -42,11 +37,11 @@ public class User {
 
     @Column(name = "login")
     @Enumerated(EnumType.STRING)
-    private Login login;
+    private LoginWay loginWay;
 
 
     @Builder
-    public User(int memberNum, String userId, String password, String name, String nickname, String email, String createdDate, Login login) {
+    public User(int memberNum, String userId, String password, String name, String nickname, String email, String createdDate, LoginWay loginWay) {
         this.memberNum = memberNum;
         this.userId = userId;
         this.password = password;
@@ -54,6 +49,6 @@ public class User {
         this.nickname = nickname;
         this.email = email;
         this.createdDate = createdDate;
-        this.login = login;
+        this.loginWay = loginWay;
     }
 }
