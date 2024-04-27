@@ -28,7 +28,7 @@ public class RoomService {
     private final ParticipantRepository participantRepository;
 
     @Transactional
-    public AddRoomRequest save(AddRoomRequest request){
+    public AddRoomRequest save(AddRoomRequest request) throws PastReleaseDateException {
         //공개 날짜 체크
         if(request.getReleaseDate() != null){
             LocalDateTime release_date = LocalDateTime.parse(String.valueOf(request.getReleaseDate()));
@@ -69,7 +69,7 @@ public class RoomService {
         return invite_code;
     }
 
-    public List<Room> findMyRollingPapers(int memberNum){  //내 롤링페이퍼 목록 조회
+    public List<Room> findMyRollingPapers(int memberNum) throws RoomNotFoundException {  //내 롤링페이퍼 목록 조회
         List<String> roomIdList = participantRepository.findRoomIdByMemberNumAndStatus(memberNum, ParticipantStatus.ACCEPT);  //memberNum이 참가한 방 아이디 리스트
         List<Room> roomList1 = roomRepository.findAllByRoomIdIn(roomIdList);  //참가한 방 리스트
         List<Room> roomList2 = roomRepository.findAllByHostId(memberNum);  //방장인 방 리스트

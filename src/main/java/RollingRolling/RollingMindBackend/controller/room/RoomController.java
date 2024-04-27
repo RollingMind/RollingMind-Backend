@@ -3,6 +3,8 @@ package RollingRolling.RollingMindBackend.controller.room;
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
 import RollingRolling.RollingMindBackend.domain.room.Room;
 import RollingRolling.RollingMindBackend.dto.room.AddRoomRequest;
+import RollingRolling.RollingMindBackend.exception.PastReleaseDateException;
+import RollingRolling.RollingMindBackend.exception.RoomNotFoundException;
 import RollingRolling.RollingMindBackend.service.room.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,7 @@ public class RoomController {
     private final RoomService roomService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createRoom(@RequestBody AddRoomRequest request) {  //방 생성
+    public ResponseEntity<?> createRoom(@RequestBody AddRoomRequest request) throws PastReleaseDateException {  //방 생성
         AddRoomRequest addCreateRequest = roomService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(addCreateRequest);
     }
@@ -31,7 +33,7 @@ public class RoomController {
     }
 
      @GetMapping("/{memberNum}/rollingpapers")
-    public ResponseEntity<List<Room>> getMyRollingPapers(@PathVariable int memberNum){  //내 롤링페이퍼 보관함
+    public ResponseEntity<List<Room>> getMyRollingPapers(@PathVariable int memberNum) throws RoomNotFoundException {  //내 롤링페이퍼 보관함
          return ResponseEntity.ok().body(roomService.findMyRollingPapers(memberNum));
      }
 }

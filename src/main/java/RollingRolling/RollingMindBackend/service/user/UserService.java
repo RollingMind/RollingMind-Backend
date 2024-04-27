@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Random;
 
 import static java.time.LocalTime.now;
@@ -30,6 +31,7 @@ public class UserService {
 
     @Autowired
     private final PasswordEncoder passwordEncoder;
+
 
     @Transactional
     public boolean existsByUserId(String userId){
@@ -47,7 +49,7 @@ public class UserService {
     }
 
     // 중복 처리
-    public boolean checkUserIdDuplicate(String userId){
+    public boolean checkUserIdDuplication(String userId){
         return userRepository.existsByUserId(userId);
     }
 

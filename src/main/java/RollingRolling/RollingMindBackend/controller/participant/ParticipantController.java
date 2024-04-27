@@ -3,6 +3,7 @@ package RollingRolling.RollingMindBackend.controller.participant;
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
 import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import RollingRolling.RollingMindBackend.dto.participant.AddParticipantRequest;
+import RollingRolling.RollingMindBackend.exception.ParticipantNotFoundException;
 import RollingRolling.RollingMindBackend.service.participant.ParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class ParticipantController {
     }
 
     @PutMapping("/{id}")  //참가자 참여요청 상태 업데이트
-    public ResponseEntity<Participant> updateParticipantStatus(@PathVariable Long id, @RequestBody Participant p){
+    public ResponseEntity<Participant> updateParticipantStatus(@PathVariable Long id, @RequestBody Participant p) throws ParticipantNotFoundException {
         Participant participant = participantService.updateStatus(id, p.getStatus());
         return ResponseEntity.ok().body(participant);
     }

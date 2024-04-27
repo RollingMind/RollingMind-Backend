@@ -28,7 +28,7 @@ public class ParticipantService {
         return participantRepository.save(participant);
     }
 
-    public Participant updateStatus(Long id, ParticipantStatus status){  //참가자 참여요청 상태 업데이트
+    public Participant updateStatus(Long id, ParticipantStatus status) throws ParticipantNotFoundException {  //참가자 참여요청 상태 업데이트
         Participant participant = participantRepository.findById(id)
                 .orElseThrow(() -> new ParticipantNotFoundException(ErrorCode.PARTICIPANT_NOT_FOUND));
         participant.update(status);

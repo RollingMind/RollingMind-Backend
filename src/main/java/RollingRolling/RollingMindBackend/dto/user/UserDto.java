@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -42,6 +44,5 @@ public class UserDto {
     private String createdDate;
 
     private Login login;
-
 
 }
