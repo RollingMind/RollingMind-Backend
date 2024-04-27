@@ -28,7 +28,7 @@ public class RoomService {
     private final ParticipantRepository participantRepository;
 
     @Transactional
-    public AddRoomRequest save(AddRoomRequest request){  //방 테이블에 저장
+    public AddRoomRequest save(AddRoomRequest request){
         //공개 날짜 체크
         if(request.getReleaseDate() != null){
             LocalDateTime release_date = LocalDateTime.parse(String.valueOf(request.getReleaseDate()));
@@ -37,7 +37,7 @@ public class RoomService {
             }
         }
 
-        Room room = Room.builder()
+        Room room = Room.builder()  //방 저장
                 .roomId(request.getRoomId())
                 .hostId(request.getHostId())
                 .open(request.getOpen())
@@ -48,6 +48,15 @@ public class RoomService {
                 .templateId(request.getTemplateId())
                 .build();
         roomRepository.save(room);
+
+        request.getParticipantList().forEach(memberNum -> {  //참가자 저장
+            Participant participant = Participant.builder()
+                    .roomId(request.getRoomId())
+                    .memberNum(memberNum)
+                    .status(ParticipantStatus.ACCEPT)
+                    .build();
+            participantRepository.save(participant);
+        });
 
         return request;
     }
