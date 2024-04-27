@@ -1,7 +1,6 @@
 package RollingRolling.RollingMindBackend.dto.user;
 
 import RollingRolling.RollingMindBackend.domain.user.Login;
-import RollingRolling.RollingMindBackend.domain.user.User;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -9,13 +8,11 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
-public class UserDto {
+public class SignupRequest {
     @Id
     private long id;
     private int memberNum;

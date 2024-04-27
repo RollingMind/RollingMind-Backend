@@ -1,22 +1,16 @@
 package RollingRolling.RollingMindBackend.service.user;
 
 
-import RollingRolling.RollingMindBackend.controller.user.UserController;
 import RollingRolling.RollingMindBackend.domain.user.User;
-import RollingRolling.RollingMindBackend.dto.user.UserDto;
 import RollingRolling.RollingMindBackend.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 
 import static java.time.LocalTime.now;
