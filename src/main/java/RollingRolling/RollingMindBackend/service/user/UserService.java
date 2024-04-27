@@ -2,10 +2,14 @@ package RollingRolling.RollingMindBackend.service.user;
 
 
 import RollingRolling.RollingMindBackend.domain.user.User;
+import RollingRolling.RollingMindBackend.dto.user.SignupRequest;
 import RollingRolling.RollingMindBackend.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -32,6 +36,25 @@ public class UserService {
         return userRepository.existsByUserId(userId);
     }
 
+    // 회원가입
+    public User save(User Request){
+        LocalDateTime now = LocalDateTime.now();
+        User user = User.builder()
+                .memberNum(generateMemberNum())
+                .userId(Request.getUserId())
+                .password(passwordEncoder.encode(Request.getPassword()))
+                .name(Request.getName())
+                .nickname(Request.getNickname())
+                .email(Request.getEmail())
+                .createdDate(String.valueOf(now))
+                .login(Request.getLogin())
+                .build();
+
+        userRepository.save(user);
+
+        return user;
+    }
+
     // 회원 번호 생성
     public int generateMemberNum(){
         Random random = new Random();
@@ -46,26 +69,20 @@ public class UserService {
     public boolean checkUserIdDuplication(String userId){
         return userRepository.existsByUserId(userId);
     }
-
-
-    // 회원 정보 입력
-    public User save(User userDto){
-        LocalDateTime now = LocalDateTime.now();
-        User user = User.builder()
-                .memberNum(generateMemberNum())
-                .userId(userDto.getUserId())
-                .password(passwordEncoder.encode(userDto.getPassword()))
-                .name(userDto.getName())
-                .nickname(userDto.getNickname())
-                .email(userDto.getEmail())
-                .createdDate(String.valueOf(now))
-                .login(userDto.getLogin())
-                .build();
-
-        userRepository.save(user);
-
-        return user;
+    public boolean checkNicknameDuplication(String nickname){
+        return userRepository.existsByNickname(nickname);
     }
 
 
+
+    public boolean withdrawal(String userId, String password) {
+        User user = userRepository.findByUserId(userId).orElseThrow(() -> new UsernameNotFoundException("아이디가 존재하지 않습니다."));
+
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            userRepository.delete(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
