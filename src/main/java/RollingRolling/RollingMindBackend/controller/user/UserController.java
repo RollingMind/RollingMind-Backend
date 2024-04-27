@@ -1,7 +1,9 @@
 package RollingRolling.RollingMindBackend.controller.user;
 
 
+import RollingRolling.RollingMindBackend.domain.user.Login;
 import RollingRolling.RollingMindBackend.domain.user.User;
+import RollingRolling.RollingMindBackend.dto.user.LoginRequest;
 import RollingRolling.RollingMindBackend.dto.user.SignupRequest;
 import RollingRolling.RollingMindBackend.service.user.UserService;
 import RollingRolling.RollingMindBackend.validator.CheckNicknameValidator;
@@ -57,6 +59,13 @@ public class UserController {
     public ResponseEntity<?> save(@RequestBody User Request) {
         User user = userService.save(Request);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    // 로그인
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest Request) {
+        Login login = userService.login(Request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(login);
     }
 
     // 중복 처리

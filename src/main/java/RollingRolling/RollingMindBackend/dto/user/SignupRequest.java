@@ -1,6 +1,6 @@
 package RollingRolling.RollingMindBackend.dto.user;
 
-import RollingRolling.RollingMindBackend.domain.user.Login;
+import RollingRolling.RollingMindBackend.domain.user.LoginWay;
 import lombok.*;
 
 @Getter
@@ -16,5 +16,5 @@ public class SignupRequest {
     private String nickname;
     private String email;
     private String createdDate;
-    private Login login;
+    private LoginWay loginWay;
 }

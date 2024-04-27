@@ -1,5 +1,30 @@
 package RollingRolling.RollingMindBackend.domain.user;
 
-public enum Login {
-    LOCAL, KAKAO, GOOGLE;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name="Users")
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Login {
+    @Id
+    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "userId")
+    private String userId;
+
+    @Column(name = "password")
+    private String password;
+
+    // 비밀번호 암호화
+    public User toEntity(String encodedPassword) {
+        return User.builder()
+                .userId(this.userId)
+                .password(encodedPassword)
+                .build();
+    }
 }
