@@ -1,10 +1,8 @@
-package RollingRolling.RollingMindBackend.domain.FriendsList;
+package RollingRolling.RollingMindBackend.domain.friendslist;
 
+import RollingRolling.RollingMindBackend.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -26,6 +24,7 @@ public class FriendsList {
     @Column(name = "situation", nullable = false)
     private FriendsListSituation situation;
 
+    @Builder
     public FriendsList(int toUser, int fromUser, FriendsListSituation situation) {
         this.toUser = toUser;
         this.fromUser = fromUser;

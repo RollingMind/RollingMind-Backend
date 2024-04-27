@@ -1,6 +1,6 @@
-package RollingRolling.RollingMindBackend.dto.FriendsList;
+package RollingRolling.RollingMindBackend.dto.friendslist;
 
-import RollingRolling.RollingMindBackend.domain.FriendsList.FriendsListSituation;
+import RollingRolling.RollingMindBackend.domain.friendslist.FriendsListSituation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
