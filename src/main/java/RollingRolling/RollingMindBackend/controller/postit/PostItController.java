@@ -1,13 +1,12 @@
 package RollingRolling.RollingMindBackend.controller.postit;
 
 import RollingRolling.RollingMindBackend.domain.postit.PostIt;
+import RollingRolling.RollingMindBackend.dto.postit.PostitRequest;
 import RollingRolling.RollingMindBackend.service.postit.PostItService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +20,11 @@ public class PostItController {
     public ResponseEntity<List<PostIt>> findPostItList(@PathVariable String room_id){
         List<PostIt> postItList = postItService.findByRoomId(room_id);
         return ResponseEntity.ok().body(postItList);
+    }
+
+    @PostMapping("/{room_id}")
+    public ResponseEntity<PostitRequest> savePostIt(@RequestBody PostitRequest postitRequest){  //포스트잇 작성
+        PostitRequest postIt = postItService.save(postitRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(postIt);
     }
 }

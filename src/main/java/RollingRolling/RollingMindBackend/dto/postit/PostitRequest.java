@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class PostitRequest {
     private String roomId;
     private String nickname;
-    private String context;
+    private String content;
 
 }
