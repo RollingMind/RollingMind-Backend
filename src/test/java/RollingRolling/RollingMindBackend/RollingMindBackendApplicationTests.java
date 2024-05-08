@@ -5,12 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,6 +31,15 @@ class RollingMindBackendApplicationTests {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String nickname = authentication.getName();
 		postItService.delete(postItId, nickname);
+	}
+	@Test
+	@WithMockUser(username="길동", roles = {"USER"})
+	public void updatePostItTest() throws Exception {
+		Long postItId = 10L;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String nickname = authentication.getName();
+		String content = "취업할수있을까?";
+		postItService.update(postItId, nickname,content);
 	}
 	@Test
 	void contextLoads() {

@@ -6,6 +6,7 @@ import RollingRolling.RollingMindBackend.repository.postit.PostItRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -36,5 +37,18 @@ public class PostItService {
         }
 
         postItRepository.delete(postIt);
+    }
+
+    @Transactional
+    public PostIt update(Long postItId, String userNickname, String content){  //포스트잇 수정
+        PostIt postIt = postItRepository.findById(postItId)
+                .orElseThrow(() -> new EntityNotFoundException("포스트잇을 찾을 수 없습니다. id: " + postItId));
+
+        if(!postIt.getNickname().equals(userNickname)) {
+            throw new IllegalStateException("포스트잇 수정 권한이 없습니다.");
+        }
+        postIt.update(content);
+        postItRepository.save(postIt);
+        return postIt;
     }
 }

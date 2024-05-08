@@ -37,4 +37,12 @@ public class PostItController {
         postItService.delete(postItId, userNickname);
         return ResponseEntity.ok().build();
     }
+
+    @PatchMapping("/{postItId}")  //포스트잇 수정
+    public ResponseEntity<PostIt> updatePostIt(@PathVariable Long postItId, @RequestBody String content){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userNickname = authentication.getName();
+        PostIt postIt = postItService.update(postItId,userNickname,content);
+        return ResponseEntity.ok().body(postIt);
+    }
 }
