@@ -1,8 +1,9 @@
 package RollingRolling.RollingMindBackend.service.postit;
 
 import RollingRolling.RollingMindBackend.domain.postit.PostIt;
-import RollingRolling.RollingMindBackend.dto.postit.PostitRequest;
+import RollingRolling.RollingMindBackend.dto.postit.PostItRequest;
 import RollingRolling.RollingMindBackend.repository.postit.PostItRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class PostItService {
         return postItRepository.findByRoomId(roomId);
     }
 
-    public PostitRequest save(PostitRequest postitRequest){  //포스트잇 저장
+    public PostItRequest save(PostItRequest postitRequest){  //포스트잇 저장
         PostIt postIt = PostIt.builder()
                 .roomId(postitRequest.getRoomId())
                 .nickname(postitRequest.getNickname())
@@ -24,5 +25,16 @@ public class PostItService {
         postItRepository.save(postIt);
 
         return postitRequest;
+    }
+
+    public void delete(Long postItId, String userNickname) {  //포스트잇 삭제
+        PostIt postIt = postItRepository.findById(postItId)
+                .orElseThrow(() -> new EntityNotFoundException("포스트잇을 찾을 수 없습니다. id: " + postItId));
+
+        if(!postIt.getNickname().equals(userNickname)) {
+            throw new IllegalStateException("포스트잇 삭제 권한이 없습니다.");
+        }
+
+        postItRepository.delete(postIt);
     }
 }

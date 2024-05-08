@@ -1,11 +1,13 @@
 package RollingRolling.RollingMindBackend.controller.postit;
 
 import RollingRolling.RollingMindBackend.domain.postit.PostIt;
-import RollingRolling.RollingMindBackend.dto.postit.PostitRequest;
+import RollingRolling.RollingMindBackend.dto.postit.PostItRequest;
 import RollingRolling.RollingMindBackend.service.postit.PostItService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +24,17 @@ public class PostItController {
         return ResponseEntity.ok().body(postItList);
     }
 
-    @PostMapping("/{room_id}")
-    public ResponseEntity<PostitRequest> savePostIt(@RequestBody PostitRequest postitRequest){  //포스트잇 작성
-        PostitRequest postIt = postItService.save(postitRequest);
+    @PostMapping("/{room_id}")  //포스트잇 작성
+    public ResponseEntity<PostItRequest> savePostIt(@RequestBody PostItRequest postItRequest){
+        PostItRequest postIt = postItService.save(postItRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(postIt);
+    }
+
+    @DeleteMapping("/delete/{postItId}")  //포스트잇 삭제
+    public ResponseEntity<?> deletePostIt(@PathVariable Long postItId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userNickname = authentication.getName();
+        postItService.delete(postItId, userNickname);
+        return ResponseEntity.ok().build();
     }
 }

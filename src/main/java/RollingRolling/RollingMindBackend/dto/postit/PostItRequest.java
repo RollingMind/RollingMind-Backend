@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class PositRequest {
+public class PostItRequest {
     private String roomId;
     private String nickname;
     private String content;
