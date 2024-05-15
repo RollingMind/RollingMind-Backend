@@ -26,4 +26,8 @@ public class TemplateService {
     public List<Template> searchTemplatesByHashtag(String keyword){
         return templateRepository.findByHashtagContaining(keyword);
     }
+
+    public Template findByTemplateId(int templateId){
+        return templateRepository.findByTemplateId(templateId);
+    }
 }

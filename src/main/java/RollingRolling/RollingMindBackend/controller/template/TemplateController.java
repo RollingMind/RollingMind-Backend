@@ -17,7 +17,7 @@ import java.util.List;
 public class TemplateController {
     private final TemplateService templateService;
 
-    @GetMapping("/{memberNum}")
+    @GetMapping("/{memberNum}/like")
     public ResponseEntity<List<TemplateResponse>> findTemplateLikes(@PathVariable int memberNum){
         return ResponseEntity.ok().body(templateService.findTemplatesByMemberNum(memberNum));
     }
@@ -34,5 +34,10 @@ public class TemplateController {
             throw new TemplateNotFoundException(ErrorCode.TEMPLATE_NOT_FOUND);
         }
         return ResponseEntity.ok().body(templateList);
+    }
+
+    @GetMapping("/{templateId}")
+    public ResponseEntity<Template> findByTemplateId(@PathVariable int templateId){
+        return ResponseEntity.ok().body(templateService.findByTemplateId(templateId));
     }
 }
