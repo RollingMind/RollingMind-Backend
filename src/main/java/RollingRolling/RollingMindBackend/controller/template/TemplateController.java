@@ -22,4 +22,9 @@ public class TemplateController {
     public ResponseEntity<List<TemplateResponse>> findTemplateLikes(@PathVariable int memberNum){
         return ResponseEntity.ok().body(templateService.findTemplatesByMemberNum(memberNum));
     }
+
+    @GetMapping
+    public ResponseEntity<List<Template>> findAllTemplates(){
+        return ResponseEntity.ok().body(templateService.findAllTemplates());
+    }
 }
