@@ -26,4 +26,11 @@ public class GlobalExceptionHandler {
                 .status(ErrorCode.ROOM_NOT_FOUND.getStatus().value())
                 .body(new ErrorDTO(ErrorCode.ROOM_NOT_FOUND));
     }
+
+    @ExceptionHandler({TemplateNotFoundException.class})
+    protected ResponseEntity handleTemplateNotFoundException(TemplateNotFoundException ex){
+        return ResponseEntity
+                .status(ErrorCode.TEMPLATE_NOT_FOUND.getStatus().value())
+                .body(new ErrorDTO(ErrorCode.TEMPLATE_NOT_FOUND));
+    }
 }
