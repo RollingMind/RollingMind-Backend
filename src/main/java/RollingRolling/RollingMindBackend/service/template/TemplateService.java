@@ -2,6 +2,8 @@ package RollingRolling.RollingMindBackend.service.template;
 
 import RollingRolling.RollingMindBackend.domain.Template.Template;
 import RollingRolling.RollingMindBackend.dto.Template.TemplateResponse;
+import RollingRolling.RollingMindBackend.exception.ErrorCode;
+import RollingRolling.RollingMindBackend.exception.TemplateNotFoundException;
 import RollingRolling.RollingMindBackend.repository.template.TemplateLikesRepository;
 import RollingRolling.RollingMindBackend.repository.template.TemplateRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,8 @@ public class TemplateService {
         return templateRepository.findByHashtagContaining(keyword);
     }
 
-    public Template findByTemplateId(int templateId){
-        return templateRepository.findByTemplateId(templateId);
+    public Template findByTemplateId(int templateId) throws TemplateNotFoundException {
+        return templateRepository.findByTemplateId(templateId)
+                .orElseThrow(() -> new TemplateNotFoundException(ErrorCode.TEMPLATE_NOT_FOUND));
     }
 }
