@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TemplateRepository extends JpaRepository<Template, Long> {
     @Query("SELECT t FROM Template t WHERE t.templateId IN :templateIds")
     List<TemplateResponse> findByTemplateIds(List<Long> templateIds);
     List<Template> findByHashtagContaining(String keyword);
-    Template findByTemplateId(int templateId);
+    Optional<Template> findByTemplateId(int templateId);
 }

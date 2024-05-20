@@ -4,6 +4,7 @@ import RollingRolling.RollingMindBackend.domain.participant.Participant;
 import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import RollingRolling.RollingMindBackend.domain.room.Room;
 import RollingRolling.RollingMindBackend.dto.room.AddRoomRequest;
+import RollingRolling.RollingMindBackend.dto.room.RoomResponse;
 import RollingRolling.RollingMindBackend.exception.ErrorCode;
 import RollingRolling.RollingMindBackend.exception.ParticipantNotFoundException;
 import RollingRolling.RollingMindBackend.exception.PastReleaseDateException;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -79,5 +81,21 @@ public class RoomService {
             throw new RoomNotFoundException(ErrorCode.ROOM_NOT_FOUND);
         }
         return roomList1;
+    }
+
+    public RoomResponse getRoom(String roomId) throws RoomNotFoundException {
+        List<Object[]> results = roomRepository.findByRoomId(roomId);
+        if (!results.isEmpty()) {
+            Object[] result = results.get(0);
+            Room room = (Room) result[0];
+            Long count = (Long) result[1];
+            return new RoomResponse(room, count);
+        }else{
+            throw new RoomNotFoundException(ErrorCode.ROOM_NOT_FOUND);
+        }
+    }
+
+    public void deleteRoom(String roomId, int host_id){  //방 삭제
+
     }
 }
