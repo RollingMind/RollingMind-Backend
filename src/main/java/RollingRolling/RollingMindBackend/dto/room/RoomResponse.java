@@ -21,7 +21,7 @@ public class RoomResponse {
     private int participantsCount;
 
     public RoomResponse(Room room, long participantsCount) {
-        this.id = room.getId();
+        this.id = room.getIdx();
         this.roomId = room.getRoomId();
         this.hostId = room.getHostId();
         this.open = room.getOpen();

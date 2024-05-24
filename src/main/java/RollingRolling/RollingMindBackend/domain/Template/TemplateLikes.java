@@ -13,10 +13,10 @@ public class TemplateLikes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long id;
+    private Long idx;
 
-    @Column(nullable = false, name = "memberNum")
-    private int memberNum;
+    @Column(nullable = false, name = "id")
+    private int id;
 
     @Column(name = "templateId")
     private int templateId;
@@ -27,8 +27,8 @@ public class TemplateLikes {
     private Template template;
 
     @Builder
-    public TemplateLikes(int memberNum, int templateId){
-        this.memberNum = memberNum;
+    public TemplateLikes(int id, int templateId){
+        this.id = id;
         this.templateId = templateId;
     }
 }

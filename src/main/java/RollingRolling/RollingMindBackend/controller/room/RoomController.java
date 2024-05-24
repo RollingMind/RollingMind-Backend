@@ -33,13 +33,13 @@ public class RoomController {
         return ResponseEntity.ok().body(Map.of("invite_code", invite_code));
     }
 
-    @GetMapping("/{memberNum}/rollingpapers")
-    public ResponseEntity<List<Room>> getMyRollingPapers(@PathVariable int memberNum) throws RoomNotFoundException {  //내 롤링페이퍼 보관함
-        return ResponseEntity.ok().body(roomService.findMyRollingPapers(memberNum));
+    @GetMapping("/{id}/rollingpapers")
+    public ResponseEntity<List<Room>> getMyRollingPapers(@PathVariable("id") int id) throws RoomNotFoundException {  //내 롤링페이퍼 보관함
+        return ResponseEntity.ok().body(roomService.findMyRollingPapers(id));
     }
 
     @GetMapping("/room/{roomId}")
-    public ResponseEntity<RoomResponse> getRoom(@PathVariable String roomId) throws RoomNotFoundException {
+    public ResponseEntity<RoomResponse> getRoom(@PathVariable("roomId") String roomId) throws RoomNotFoundException {
         return ResponseEntity.ok().body(roomService.getRoom(roomId));
     }
 }

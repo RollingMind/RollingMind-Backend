@@ -19,6 +19,7 @@ public class AddRoomRequest {
     private RoomOpen open;
     private RoomParticipationRequest participationRequest;
     private String title;
+    private String content;
     private LocalDateTime releaseDate;
     private RoomTemplateType templateType;
     private int templateId;
