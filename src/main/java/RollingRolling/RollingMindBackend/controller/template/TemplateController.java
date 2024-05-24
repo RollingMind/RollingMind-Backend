@@ -17,9 +17,9 @@ import java.util.List;
 public class TemplateController {
     private final TemplateService templateService;
 
-    @GetMapping("/{memberNum}/like")
-    public ResponseEntity<List<TemplateResponse>> findTemplateLikes(@PathVariable int memberNum){
-        return ResponseEntity.ok().body(templateService.findTemplatesByMemberNum(memberNum));
+    @GetMapping("/{id}/like")
+    public ResponseEntity<List<TemplateResponse>> findTemplateLikes(@PathVariable int id){
+        return ResponseEntity.ok().body(templateService.findTemplatesByMemberNum(id));
     }
 
     @GetMapping

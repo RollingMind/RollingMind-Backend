@@ -9,11 +9,8 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "template")
 public class Template {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "templateId")
     private int templateId;
 
@@ -25,8 +22,7 @@ public class Template {
 
 
     @Builder
-    public Template(int templateId, String optionValue, String hashtag) {
-        this.templateId = templateId;
+    public Template(String optionValue, String hashtag) {
         this.optionValue = optionValue;
         this.hashtag = hashtag;
     }

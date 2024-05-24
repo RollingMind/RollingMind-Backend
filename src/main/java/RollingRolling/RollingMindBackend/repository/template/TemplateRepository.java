@@ -5,13 +5,14 @@ import RollingRolling.RollingMindBackend.domain.room.Room;
 import RollingRolling.RollingMindBackend.dto.Template.TemplateResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface TemplateRepository extends JpaRepository<Template, Long> {
     @Query("SELECT t FROM Template t WHERE t.templateId IN :templateIds")
-    List<TemplateResponse> findByTemplateIds(List<Long> templateIds);
+    List<TemplateResponse> findByTemplateIds(@Param("templateIds") List<Long> templateIds);
     List<Template> findByHashtagContaining(String keyword);
     Optional<Template> findByTemplateId(int templateId);
 }

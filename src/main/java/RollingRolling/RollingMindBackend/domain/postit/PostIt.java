@@ -15,7 +15,7 @@ public class PostIt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Long id;
+    private Long idx;
 
     private String roomId;
 

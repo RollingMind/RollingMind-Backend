@@ -45,16 +45,17 @@ public class RoomService {
                 .open(request.getOpen())
                 .participationRequest(request.getParticipationRequest())
                 .title(request.getTitle())
+                .content(request.getContent())
                 .releaseDate(request.getReleaseDate())
                 .templateType(request.getTemplateType())
                 .templateId(request.getTemplateId())
                 .build();
         roomRepository.save(room);
 
-        request.getParticipantList().forEach(memberNum -> {  //참가자 저장
+        request.getParticipantList().forEach(id -> {  //참가자 저장
             Participant participant = Participant.builder()
                     .roomId(request.getRoomId())
-                    .memberNum(memberNum)
+                    .id(id)
                     .status(ParticipantStatus.ACCEPT)
                     .build();
             participantRepository.save(participant);
@@ -71,10 +72,10 @@ public class RoomService {
         return invite_code;
     }
 
-    public List<Room> findMyRollingPapers(int memberNum) throws RoomNotFoundException {  //내 롤링페이퍼 목록 조회
-        List<String> roomIdList = participantRepository.findRoomIdByMemberNumAndStatus(memberNum, ParticipantStatus.ACCEPT);  //memberNum이 참가한 방 아이디 리스트
+    public List<Room> findMyRollingPapers(int id) throws RoomNotFoundException {  //내 롤링페이퍼 목록 조회
+        List<String> roomIdList = participantRepository.findRoomIdByIdAndStatus(id, ParticipantStatus.ACCEPT);  //id가 참가한 방 아이디 리스트
         List<Room> roomList1 = roomRepository.findAllByRoomIdIn(roomIdList);  //참가한 방 리스트
-        List<Room> roomList2 = roomRepository.findAllByHostId(memberNum);  //방장인 방 리스트
+        List<Room> roomList2 = roomRepository.findAllByHostId(id);  //방장인 방 리스트
         roomList1.addAll(roomList2);
 
         if(roomList1.isEmpty()){  //없는 경우

@@ -16,8 +16,9 @@ import java.util.List;
 public class TemplateService {
     private final TemplateLikesRepository templateLikesRepository;
     private final TemplateRepository templateRepository;
-    public List<TemplateResponse> findTemplatesByMemberNum(int memberNum) {
-        List<Long> templateIds = templateLikesRepository.findTemplateIdsByMemberNum(memberNum);
+
+    public List<TemplateResponse> findTemplatesByMemberNum(int id) {
+        List<Long> templateIds = templateLikesRepository.findTemplateIdsByMemberNum(id);
         return templateRepository.findByTemplateIds(templateIds);
     }
 

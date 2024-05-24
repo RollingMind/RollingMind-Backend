@@ -17,7 +17,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Long id;
+    private Long idx;
 
     @Column(nullable = false, name = "roomId")
     private String roomId;
@@ -37,6 +37,9 @@ public class Room {
     private String title;
 
     @Column
+    private String content;
+
+    @Column
     private LocalDateTime releaseDate;
 
     @Enumerated(EnumType.STRING)
@@ -51,12 +54,13 @@ public class Room {
     private List<Participant> participantList;
 
     @Builder
-    public Room(String roomId, int hostId, RoomOpen open, RoomParticipationRequest participationRequest, String title, LocalDateTime releaseDate, RoomTemplateType templateType, int templateId){
+    public Room(String roomId, int hostId, RoomOpen open, RoomParticipationRequest participationRequest, String title, String content, LocalDateTime releaseDate, RoomTemplateType templateType, int templateId){
         this.roomId = roomId;
         this.hostId = hostId;
         this.open = open;
         this.participationRequest = participationRequest;
         this.title = title;
+        this.content = content;
         this.releaseDate = releaseDate;
         this.templateType = templateType;
         this.templateId = templateId;
