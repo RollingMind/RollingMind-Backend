@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface PostItRepository extends JpaRepository<PostIt, Long> {
     List<PostIt> findByRoomId(String roomId);
+    void deleteAllByRoomId(String roomId);
 }

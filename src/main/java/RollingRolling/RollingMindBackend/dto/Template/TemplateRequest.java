@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class TemplateRequest {
-    private int Template_id;
     private String option_value;
     private String hashtag;
 

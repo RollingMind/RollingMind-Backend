@@ -14,13 +14,13 @@ public class Participant {
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idx;
 
     @Column(name = "roomId", nullable = false)
     private String roomId;
 
-    @Column(name = "memberNum", nullable = false)
-    private int memberNum;
+    @Column(name = "id", nullable = false)
+    private int id;
 
     @Enumerated(EnumType.STRING)
     private ParticipantStatus status;
@@ -31,9 +31,9 @@ public class Participant {
     private Room room;
 
     @Builder
-    public Participant(String roomId, int memberNum, ParticipantStatus status){
+    public Participant(String roomId, int id, ParticipantStatus status){
         this.roomId = roomId;
-        this.memberNum = memberNum;
+        this.id = id;
         this.status = status;
     }
 

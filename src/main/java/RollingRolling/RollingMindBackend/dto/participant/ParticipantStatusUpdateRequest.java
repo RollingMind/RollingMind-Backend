@@ -4,12 +4,12 @@ import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-public class AddParticipantRequest {
-    private String roomId;
-    private int id;
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ParticipantStatusUpdateRequest {
     private ParticipantStatus status;
 }
