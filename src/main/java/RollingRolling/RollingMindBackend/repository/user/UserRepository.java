@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 @EnableJpaRepositories
 public interface UserRepository extends JpaRepository<User, String>{
-    boolean existsByMemberNum(int memberNum);
     boolean existsByUserId(String userId);
     boolean existsByNickname(String nickname);
 

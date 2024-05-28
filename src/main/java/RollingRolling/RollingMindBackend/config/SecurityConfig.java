@@ -14,15 +14,15 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity
-@EnableMethodSecurity
-@Configuration
-@RequiredArgsConstructor
-public class SecurityConfig {
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
-
-
-}
+//@EnableWebSecurity
+//@EnableMethodSecurity
+//@Configuration
+//@RequiredArgsConstructor
+//public class SecurityConfig {
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//    }
+//
+//
+//}
