@@ -1,8 +1,10 @@
 package RollingRolling.RollingMindBackend.controller.postit;
 
 import RollingRolling.RollingMindBackend.domain.postit.PostIt;
+import RollingRolling.RollingMindBackend.domain.user.CustomUserDetails;
 import RollingRolling.RollingMindBackend.dto.postit.PostItRequest;
 import RollingRolling.RollingMindBackend.service.postit.PostItService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,16 +35,18 @@ public class PostItController {
     @DeleteMapping("/delete/{postItId}")  //포스트잇 삭제
     public ResponseEntity<?> deletePostIt(@PathVariable Long postItId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userNickname = authentication.getName();
-        postItService.delete(postItId, userNickname);
+        CustomUserDetails currentUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        String currentUserNickName = currentUserDetails.getNickname();
+        postItService.delete(postItId, currentUserNickName);
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{postItId}")  //포스트잇 수정
     public ResponseEntity<PostIt> updatePostIt(@PathVariable Long postItId, @RequestBody String content){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userNickname = authentication.getName();
-        PostIt postIt = postItService.update(postItId,userNickname,content);
+        CustomUserDetails currentUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        String currentUserNickName = currentUserDetails.getNickname();
+        PostIt postIt = postItService.update(postItId,currentUserNickName,content);
         return ResponseEntity.ok().body(postIt);
     }
 }
