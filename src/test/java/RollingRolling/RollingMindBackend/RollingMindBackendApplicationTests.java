@@ -1,8 +1,10 @@
 package RollingRolling.RollingMindBackend;
 
 import RollingRolling.RollingMindBackend.domain.user.CustomUserDetails;
+import RollingRolling.RollingMindBackend.dto.postit.PostItUpdateRequest;
 import RollingRolling.RollingMindBackend.service.postit.PostItService;
 import RollingRolling.RollingMindBackend.service.room.RoomService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,6 +37,8 @@ class RollingMindBackendApplicationTests {
 	private MockMvc mockMvc;
 	@MockBean
 	private RoomService roomService;
+	@Autowired
+	private ObjectMapper objectMapper;
 	@Test
 	@WithMockUser(username="길동", roles = {"USER"})
 	public void deletePostItTest() throws Exception {
@@ -44,13 +48,31 @@ class RollingMindBackendApplicationTests {
 		postItService.delete(postItId, nickname);
 	}
 	@Test
-	@WithMockUser(username="길동", roles = {"USER"})
+	@WithMockUser(username="순자", roles = {"USER"})
 	public void updatePostItTest() throws Exception {
-		Long postItId = 10L;
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String nickname = authentication.getName();
-		String content = "취업할수있을까?";
-		postItService.update(postItId, nickname,content);
+		CustomUserDetails customUserDetails = new CustomUserDetails();
+		customUserDetails.setId(100002);
+		customUserDetails.setNickname("순자");
+		UsernamePasswordAuthenticationToken authentication =
+				new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+
+		// Update request 객체 생성
+		PostItUpdateRequest postItUpdateRequest = new PostItUpdateRequest("수수수수퍼노바", "#FFFFFF", "닝닝");
+
+		// 요청 바디를 JSON 문자열로 변환
+		String requestBody = objectMapper.writeValueAsString(postItUpdateRequest);
+
+		// PATCH 요청 수행
+		ResultActions resultActions = mockMvc.perform(
+						patch("/api/postit/{postItId}", 232)
+								.contentType(MediaType.APPLICATION_JSON)
+								.content(requestBody))
+				.andDo(print()) // 요청 및 응답 출력
+				.andExpect(status().isOk()) // 상태 코드 200 확인
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON)) // 응답 Content-Type 확인
+				.andExpect(content().json(requestBody)); // 응답 내용 확인 (여기서는 요청과 동일한 내용이 반환된다고 가정)
+
 	}
 	@Test
 	@WithMockUser(username="박성호", roles={"USER"})
