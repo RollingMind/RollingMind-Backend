@@ -33,4 +33,11 @@ public class GlobalExceptionHandler {
                 .status(ErrorCode.TEMPLATE_NOT_FOUND.getStatus().value())
                 .body(new ErrorDTO(ErrorCode.TEMPLATE_NOT_FOUND));
     }
+
+    @ExceptionHandler({BadRequestException.class})
+    protected ResponseEntity handleBadRequestNotFoundException(BadRequestException ex){
+        return ResponseEntity
+                .status(ErrorCode.BAD_REQUEST.getStatus().value())
+                .body(new ErrorDTO(ErrorCode.BAD_REQUEST));
+    }
 }

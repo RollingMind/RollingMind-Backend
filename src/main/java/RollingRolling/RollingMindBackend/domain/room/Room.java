@@ -1,6 +1,7 @@
 package RollingRolling.RollingMindBackend.domain.room;
 
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
+import RollingRolling.RollingMindBackend.domain.postit.PostIt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -52,6 +53,7 @@ public class Room {
     @JsonIgnore
     @OneToMany(mappedBy = "room")
     private List<Participant> participantList;
+
 
     @Builder
     public Room(String roomId, int hostId, RoomOpen open, RoomParticipationRequest participationRequest, String title, String content, LocalDateTime releaseDate, RoomTemplateType templateType, int templateId){

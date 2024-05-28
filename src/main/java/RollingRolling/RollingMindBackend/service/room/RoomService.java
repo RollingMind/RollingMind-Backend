@@ -3,17 +3,17 @@ package RollingRolling.RollingMindBackend.service.room;
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
 import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import RollingRolling.RollingMindBackend.domain.room.Room;
+import RollingRolling.RollingMindBackend.domain.user.CustomUserDetails;
 import RollingRolling.RollingMindBackend.dto.room.AddRoomRequest;
 import RollingRolling.RollingMindBackend.dto.room.RoomResponse;
-import RollingRolling.RollingMindBackend.exception.ErrorCode;
-import RollingRolling.RollingMindBackend.exception.ParticipantNotFoundException;
-import RollingRolling.RollingMindBackend.exception.PastReleaseDateException;
-import RollingRolling.RollingMindBackend.exception.RoomNotFoundException;
+import RollingRolling.RollingMindBackend.exception.*;
 import RollingRolling.RollingMindBackend.repository.participant.ParticipantRepository;
 import RollingRolling.RollingMindBackend.repository.postit.PostItRepository;
 import RollingRolling.RollingMindBackend.repository.room.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 public class RoomService {
     private final RoomRepository roomRepository;
     private final ParticipantRepository participantRepository;
+    private final PostItRepository postItRepository;
 
     @Transactional
     public AddRoomRequest save(AddRoomRequest request) throws PastReleaseDateException {
@@ -85,7 +86,7 @@ public class RoomService {
     }
 
     public RoomResponse getRoom(String roomId) throws RoomNotFoundException {
-        List<Object[]> results = roomRepository.findByRoomId(roomId);
+        List<Object[]> results = roomRepository.findRoomWithParticipantCountByRoomId(roomId);
         if (!results.isEmpty()) {
             Object[] result = results.get(0);
             Room room = (Room) result[0];
@@ -96,7 +97,21 @@ public class RoomService {
         }
     }
 
-    public void deleteRoom(String roomId, int host_id){  //방 삭제
+    @Transactional
+    public void delete(String roomId) throws BadRequestException, RoomNotFoundException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails currentUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        int currentUserId = currentUserDetails.getId();
 
+        Room room = roomRepository.findByRoomId(roomId)
+                .orElseThrow(() -> new RoomNotFoundException(ErrorCode.ROOM_NOT_FOUND));
+
+        if(currentUserId != room.getHostId()){
+            throw new BadRequestException(ErrorCode.BAD_REQUEST.getMessage());
+        }
+
+        postItRepository.deleteAllByRoomId(roomId);  //방의 포스트잇들 삭제
+
+        roomRepository.delete(room);  //방 삭제
     }
 }
