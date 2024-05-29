@@ -11,10 +11,9 @@ import lombok.*;
 public class User {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private String userId;
 
     @Column(name = "password")
@@ -29,10 +28,10 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "createdDate")
+    @Column(name = "created_date")
     private String createdDate;
 
-    @Column(name = "login")
+    @Column(name = "login_way")
     @Enumerated(EnumType.STRING)
     private LoginWay loginWay;
 

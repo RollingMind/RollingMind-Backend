@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
-import static java.time.LocalTime.now;
 
 @Service
 @Component
@@ -26,24 +25,20 @@ public class UserService {
 
     @Autowired
     private  final UserRepository userRepository;
-
-//    @Autowired
-//    private final PasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
 
-    @Transactional
-    public boolean existsByUserId(String userId){
-        return userRepository.existsByUserId(userId);
-    }
+//    @Transactional
+//    public boolean existsByUserId(String userId){
+//        return userRepository.existsByUserId(userId);
+//    }
 
     // 회원가입
     public User save(User Request){
         LocalDateTime now = LocalDateTime.now();
         User user = User.builder()
-                .id(Request.getId())
                 .userId(Request.getUserId())
-//                .password(passwordEncoder.encode(Request.getPassword()))
-                .password((Request.getPassword()))
+                .password(passwordEncoder.encode(Request.getPassword()))
                 .name(Request.getName())
                 .nickname(Request.getNickname())
                 .email(Request.getEmail())
@@ -58,13 +53,13 @@ public class UserService {
 
 
 
-    // 중복 처리
-    public boolean checkUserIdDuplication(String userId){
-        return userRepository.existsByUserId(userId);
-    }
-    public boolean checkNicknameDuplication(String nickname){
-        return userRepository.existsByNickname(nickname);
-    }
+//    // 중복 처리
+//    public boolean checkUserIdDuplication(String userId){
+//        return userRepository.existsByUserId(userId);
+//    }
+//    public boolean checkNicknameDuplication(String nickname){
+//        return userRepository.existsByNickname(nickname);
+//    }
 
 
 //    //로그인
