@@ -9,17 +9,10 @@ import lombok.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Login {
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private String userId;
 
     @Column(name = "password")
     private String password;
 
-    // 비밀번호 암호화
-    public User toEntity(String encodedPassword) {
-        return User.builder()
-                .userId(this.userId)
-                .password(encodedPassword)
-                .build();
-    }
 }

@@ -27,6 +27,7 @@ class UserServiceTest {
                 .createdDate("2024-04-18 19:29:10")
                 .loginWay(LoginWay.KAKAO)
                 .build();
+
         userService.save(user);
     }
 

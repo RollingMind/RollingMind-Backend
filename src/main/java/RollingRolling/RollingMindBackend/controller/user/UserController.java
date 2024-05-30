@@ -55,12 +55,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
-//    // 로그인
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody LoginRequest Request) {
-//        Login login = userService.login(Request);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(login);
-//    }
+    // 로그인
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+        LoginRequest login = userService.login(loginRequest);
+        if(login == null){
+            return "redirect:/login";
+        }
+        session.setAttribute("userId", login.getUserId());
+
+        //redirect는 경로로 설정
+        return "redirect:/";
+    }
 //
 //    //로그아웃
 //    @RequestMapping("/logout")
