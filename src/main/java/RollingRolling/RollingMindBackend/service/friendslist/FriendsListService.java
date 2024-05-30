@@ -15,9 +15,9 @@ public class FriendsListService {
     private final FriendsListRepository friendsListRepository;
     private final UserRepository userRepository;
 
-    public List<User> findFriendsList(int memberNum){  //친구 목록 조회
-        List<Integer> friendsIdList = friendsListRepository.findFromUserByToUserAndSituation(memberNum, FriendsListSituation.FRIEND);  //situation이 FRIEND인 fromUser 가져옴
+    public List<User> findFriendsList(int id){  //친구 목록 조회
+        List<Integer> friendsIdList = friendsListRepository.findFromUserByToUserAndSituation(id, FriendsListSituation.FRIEND);  //situation이 FRIEND인 fromUser 가져옴
 
-        return userRepository.findAllByMemberNumIn(friendsIdList);
+        return userRepository.findAllByIdIn(friendsIdList);
     }
 }
