@@ -15,6 +15,29 @@ spring:
       hibernate:
         format_sql: true
 
-
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          kakao:
+#            client-id: ba8645ef5a57d2e78dbf6f9a76c1a9f6
+#            client-secret: 0ZtiTdTKRCrvqgAiNeR95cwrxCHpV1zw
+#            client-authentication-method: client_secret_post
+#            authorization-grant-type: authorization_code
+#            scope: # https://developers.kakao.com/docs/latest/ko/kakaologin/common#user-info
+#              - profile_nickname
+#              - profile_image
+#              - account_email
+#            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+#            client-name: Kakao
+#
+#          provider:
+#            kakao:
+#              authorization-uri: https://kauth.kakao.com/oauth/authorize
+#              token-uri: https://kauth.kakao.com/oauth/token
+#              user-info-uri: https://kapi.kakao.com/v2/user/me
+#              user-info-authentication-method: header
+#              user-name-attribute: id # Kakacao 응답 값 id, connected_at, properties, kakao_count 중 id 지정
+#
 
 

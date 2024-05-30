@@ -35,7 +35,7 @@ public class UserService {
 //    }
 
     // 회원가입
-    public User save(User Request){
+    public User save(User Request) {
         LocalDateTime now = LocalDateTime.now();
         User user = User.builder()
                 .userId(Request.getUserId())
@@ -52,7 +52,6 @@ public class UserService {
     }
 
 
-
 //    // 중복 처리
 //    public boolean checkUserIdDuplication(String userId){
 //        return userRepository.existsByUserId(userId);
@@ -63,18 +62,17 @@ public class UserService {
 
 
     //로그인
-    public LoginRequest login(LoginRequest loginRequest){
+    public LoginRequest login(LoginRequest loginRequest) {
+        System.out.println(loginRequest.getUserId());
         Optional<User> byUserId = userRepository.findByUserId(loginRequest.getUserId());
-        if(byUserId.isPresent()){
+        if (byUserId.isPresent()) {
             User user = byUserId.get();
-            if(user.getPassword().equals(loginRequest.getPassword())){
-                System.out.println(user.getUserId()+user.getPassword());
+            if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
                 return loginRequest;
             }
         }
         return null;
     }
-
 
 //    // 탈퇴하기
 //    public boolean withdrawal(String userId, String password) {
@@ -88,4 +86,5 @@ public class UserService {
 ////        }
 //        return  false;
 //    }
+
 }
