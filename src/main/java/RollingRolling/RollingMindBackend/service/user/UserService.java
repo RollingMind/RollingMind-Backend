@@ -4,6 +4,7 @@ package RollingRolling.RollingMindBackend.service.user;
 import RollingRolling.RollingMindBackend.domain.user.Login;
 import RollingRolling.RollingMindBackend.domain.user.User;
 import RollingRolling.RollingMindBackend.dto.user.LoginRequest;
+import RollingRolling.RollingMindBackend.dto.user.SignupRequest;
 import RollingRolling.RollingMindBackend.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ import java.util.Random;
 public class UserService {
 
     @Autowired
-    private  final UserRepository userRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -45,7 +46,6 @@ public class UserService {
                 .createdDate(String.valueOf(now))
                 .loginWay(Request.getLoginWay())
                 .build();
-
         userRepository.save(user);
 
         return user;
@@ -62,26 +62,20 @@ public class UserService {
 //    }
 
 
-//    //로그인
-//    public Login login(LoginRequest req) {
-//        Optional<Login> optionalUser = userRepository.findByPassword(req.getUserId());
-//
-//        // loginId와 일치하는 User가 없으면 null return
-//        if(optionalUser.isEmpty()) {
-//            return null;
-//        }
-//
-//        Login login = optionalUser.get();
-//
-//        // 찾아온 User의 password와 입력된 password가 다르면 null return
-//        if(!login.getPassword().equals(req.getPassword())) {
-//            return null;
-//        }
-//
-//        return login;
-//    }
-//
-//
+    //로그인
+    public LoginRequest login(LoginRequest loginRequest){
+        Optional<User> byUserId = userRepository.findByUserId(loginRequest.getUserId());
+        if(byUserId.isPresent()){
+            User user = byUserId.get();
+            if(user.getPassword().equals(loginRequest.getPassword())){
+                System.out.println(user.getUserId()+user.getPassword());
+                return loginRequest;
+            }
+        }
+        return null;
+    }
+
+
 //    // 탈퇴하기
 //    public boolean withdrawal(String userId, String password) {
 ////        User  = userRepository.findByUserId(userId).orElseThrow(() -> new UsernameNotFoundException("아이디가 존재하지 않습니다."));
