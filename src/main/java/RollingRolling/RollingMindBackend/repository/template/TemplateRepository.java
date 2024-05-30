@@ -15,4 +15,8 @@ public interface TemplateRepository extends JpaRepository<Template, Long> {
     List<TemplateResponse> findByTemplateIds(@Param("templateIds") List<Long> templateIds);
     List<Template> findByHashtagContaining(String keyword);
     Optional<Template> findByTemplateId(int templateId);
+    @Query("SELECT t.templateId AS templateId, t.optionValue AS optionValue " +
+            "FROM Template t LEFT JOIN TemplateLikes l ON t.templateId = l.templateId " +
+            "GROUP BY t.templateId ORDER BY COUNT(l.templateId) DESC")
+    List<TemplateResponse> findTemplatesOrderByLikesCount();
 }
