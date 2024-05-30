@@ -67,9 +67,9 @@ public class UserController {
         //redirect는 경로로 설정
         return "redirect:/";
     }
-//
-//    //로그아웃
-//    @RequestMapping("/logout")
+
+    //로그아웃
+//    @GetMapping("/logout")
 //    public ModelAndView logout(HttpSession session){
 //        session.invalidate();
 //        ModelAndView mv = new ModelAndView("redirect:/");
