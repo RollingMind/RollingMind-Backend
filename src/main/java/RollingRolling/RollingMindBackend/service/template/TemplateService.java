@@ -34,4 +34,8 @@ public class TemplateService {
         return templateRepository.findByTemplateId(templateId)
                 .orElseThrow(() -> new TemplateNotFoundException(ErrorCode.TEMPLATE_NOT_FOUND));
     }
+
+    public List<TemplateResponse> findPopularTemplates(){
+        return templateRepository.findTemplatesOrderByLikesCount();
+    }
 }

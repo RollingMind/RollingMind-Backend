@@ -40,4 +40,9 @@ public class TemplateController {
     public ResponseEntity<Template> findByTemplateId(@PathVariable int templateId) throws TemplateNotFoundException {
         return ResponseEntity.ok().body(templateService.findByTemplateId(templateId));
     }
+
+    @GetMapping("/popular")
+    public ResponseEntity<List<TemplateResponse>> findPopularTemplates(){
+        return ResponseEntity.ok().body(templateService.findPopularTemplates());
+    }
 }
