@@ -6,7 +6,10 @@ import RollingRolling.RollingMindBackend.domain.room.Room;
 import RollingRolling.RollingMindBackend.domain.user.CustomUserDetails;
 import RollingRolling.RollingMindBackend.dto.room.AddRoomRequest;
 import RollingRolling.RollingMindBackend.dto.room.RoomResponse;
-import RollingRolling.RollingMindBackend.exception.*;
+import RollingRolling.RollingMindBackend.exception.BadRequestException;
+import RollingRolling.RollingMindBackend.exception.ErrorCode;
+import RollingRolling.RollingMindBackend.exception.PastReleaseDateException;
+import RollingRolling.RollingMindBackend.exception.RoomNotFoundException;
 import RollingRolling.RollingMindBackend.repository.participant.ParticipantRepository;
 import RollingRolling.RollingMindBackend.repository.postit.PostItRepository;
 import RollingRolling.RollingMindBackend.repository.room.RoomRepository;
@@ -18,10 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

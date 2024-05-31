@@ -5,7 +5,6 @@ import RollingRolling.RollingMindBackend.domain.user.CustomUserDetails;
 import RollingRolling.RollingMindBackend.dto.postit.PostItRequest;
 import RollingRolling.RollingMindBackend.dto.postit.PostItUpdateRequest;
 import RollingRolling.RollingMindBackend.service.postit.PostItService;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
