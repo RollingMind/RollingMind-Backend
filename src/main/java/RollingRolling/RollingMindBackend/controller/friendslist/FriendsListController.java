@@ -17,8 +17,8 @@ import java.util.List;
 public class FriendsListController {
     private final FriendsListService friendsListService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<User>> findFriendsList(@PathVariable("id") int id){  //친구 목록 조회
+    @GetMapping("/{id}")  //친구 목록 조회
+    public ResponseEntity<List<User>> findFriendsList(@PathVariable("id") int id){
         List<User> friendsList = friendsListService.findFriendsList(id);
         return ResponseEntity.ok().body(friendsList);
     }

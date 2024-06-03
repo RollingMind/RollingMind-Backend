@@ -17,17 +17,17 @@ import java.util.List;
 public class TemplateController {
     private final TemplateService templateService;
 
-    @GetMapping("/{id}/like")
+    @GetMapping("/{id}/like")  //좋아요 누른 템플릿 조회
     public ResponseEntity<List<TemplateResponse>> findTemplateLikes(@PathVariable int id){
-        return ResponseEntity.ok().body(templateService.findTemplatesByMemberNum(id));
+        return ResponseEntity.ok().body(templateService.findTemplatesById(id));
     }
 
-    @GetMapping
+    @GetMapping  //모든 템플릿 목록 조회
     public ResponseEntity<List<Template>> findAllTemplates(){
         return ResponseEntity.ok().body(templateService.findAllTemplates());
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search")  //템플릿 검색
     public ResponseEntity<List<Template>> searchTemplates(@RequestParam String keyword) throws TemplateNotFoundException {
         List<Template> templateList = templateService.searchTemplatesByHashtag(keyword);
         if(templateList.isEmpty()){  //검색결과가 없을 경우
@@ -36,12 +36,12 @@ public class TemplateController {
         return ResponseEntity.ok().body(templateList);
     }
 
-    @GetMapping("/{templateId}")
+    @GetMapping("/{templateId}")  //templateId인 템플릿 조회
     public ResponseEntity<Template> findByTemplateId(@PathVariable int templateId) throws TemplateNotFoundException {
         return ResponseEntity.ok().body(templateService.findByTemplateId(templateId));
     }
 
-    @GetMapping("/popular")
+    @GetMapping("/popular")  //인기있는 템플릿 목록 조회
     public ResponseEntity<List<TemplateResponse>> findPopularTemplates(){
         return ResponseEntity.ok().body(templateService.findPopularTemplates());
     }

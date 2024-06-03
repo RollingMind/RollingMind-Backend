@@ -1,6 +1,5 @@
 package RollingRolling.RollingMindBackend.domain.friendslist;
 
-import RollingRolling.RollingMindBackend.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 

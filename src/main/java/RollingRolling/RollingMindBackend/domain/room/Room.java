@@ -1,7 +1,6 @@
 package RollingRolling.RollingMindBackend.domain.room;
 
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
-import RollingRolling.RollingMindBackend.domain.postit.PostIt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,7 +1,6 @@
 package RollingRolling.RollingMindBackend.controller.participant;
 
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
-import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
 import RollingRolling.RollingMindBackend.dto.participant.AddParticipantRequest;
 import RollingRolling.RollingMindBackend.dto.participant.ParticipantStatusUpdateRequest;
 import RollingRolling.RollingMindBackend.exception.ParticipantNotFoundException;
