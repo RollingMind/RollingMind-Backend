@@ -29,11 +29,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-//    @Transactional
-//    public boolean existsByUserId(String userId){
-//        return userRepository.existsByUserId(userId);
-//    }
-
     // 회원가입
     public User save(User Request) {
         LocalDateTime now = LocalDateTime.now();
