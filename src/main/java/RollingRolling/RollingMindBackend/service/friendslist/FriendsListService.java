@@ -1,5 +1,6 @@
 package RollingRolling.RollingMindBackend.service.friendslist;
 
+import RollingRolling.RollingMindBackend.domain.friendslist.FriendsList;
 import RollingRolling.RollingMindBackend.domain.friendslist.FriendsListSituation;
 import RollingRolling.RollingMindBackend.domain.user.User;
 import RollingRolling.RollingMindBackend.repository.friendslist.FriendsListRepository;
@@ -20,4 +21,19 @@ public class FriendsListService {
 
         return userRepository.findAllByIdIn(friendsIdList);
     }
+
+
+    public FriendsList add(FriendsList Request){   //친구 신청
+        FriendsList friendsList = FriendsList.builder()
+                .toUser(Request.getToUser())
+                .fromUser(Request.getFromUser())
+                .situation(FriendsListSituation.REQUEST)
+                .build();
+        friendsListRepository.save(friendsList);
+
+        return friendsList;
+    }
+
+
+
 }

@@ -69,13 +69,14 @@ public class UserController {
     }
 
     //로그아웃
-//    @GetMapping("/logout")
-//    public ModelAndView logout(HttpSession session){
-//        session.invalidate();
-//        ModelAndView mv = new ModelAndView("redirect:/");
-//        return mv;
-//    }
-//
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
+    }
+
+
+
 //    // 중복 처리
 //    @PostMapping("/exists")
 //    public String joinProc(@Valid User Request, BindingResult bindingResult, Model model) {
