@@ -11,7 +11,7 @@ import lombok.*;
 public class FriendsList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idx;
 
     @Column(name = "to_user", nullable = false)
     private int toUser;
@@ -29,9 +29,7 @@ public class FriendsList {
         this.fromUser = fromUser;
         this.situation = situation;
     }
-    public void update(int toUser, int fromUser, FriendsListSituation situation) {
-        this.toUser = toUser;
-        this.fromUser = fromUser;
+    public void update(FriendsListSituation situation) {
         this.situation = situation;
     }
 }

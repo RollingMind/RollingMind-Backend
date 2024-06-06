@@ -2,10 +2,16 @@ package RollingRolling.RollingMindBackend.service.friendslist;
 
 import RollingRolling.RollingMindBackend.domain.friendslist.FriendsList;
 import RollingRolling.RollingMindBackend.domain.friendslist.FriendsListSituation;
+import RollingRolling.RollingMindBackend.domain.postit.PostIt;
 import RollingRolling.RollingMindBackend.domain.user.User;
+import RollingRolling.RollingMindBackend.dto.friendslist.FriendsListSituationUpdateRequest;
+import RollingRolling.RollingMindBackend.dto.postit.PostItUpdateRequest;
 import RollingRolling.RollingMindBackend.repository.friendslist.FriendsListRepository;
 import RollingRolling.RollingMindBackend.repository.user.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +40,13 @@ public class FriendsListService {
         return friendsList;
     }
 
+    public FriendsList update(int fromUser, FriendsListSituation friendsListSituation){  //친구 수락
+        FriendsList friendsList = friendsListRepository.findByFromUser(fromUser)
+                .orElseThrow(() -> new UsernameNotFoundException("유저를 찾을 수 없습니다. id: " + fromUser));
 
+        friendsList.update(friendsListSituation);
+        friendsListRepository.save(friendsList);
+        return friendsList;
+    }
 
 }

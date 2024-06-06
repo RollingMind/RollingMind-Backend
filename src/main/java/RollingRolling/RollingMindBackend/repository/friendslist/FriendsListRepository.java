@@ -17,4 +17,5 @@ public interface FriendsListRepository extends JpaRepository<FriendsList, Long> 
     @Query("SELECT f.fromUser FROM FriendsList f WHERE f.toUser = :memberNum AND f.situation = :situation")
     List<Integer> findFromUserByToUserAndSituation(@Param("memberNum")int memberNum, @Param("situation")FriendsListSituation situation);
 
+    Optional<FriendsList> findByFromUser(int fromUser);
 }
