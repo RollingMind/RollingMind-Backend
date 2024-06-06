@@ -47,15 +47,6 @@ public class UserService {
     }
 
 
-//    // 중복 처리
-//    public boolean checkUserIdDuplication(String userId){
-//        return userRepository.existsByUserId(userId);
-//    }
-//    public boolean checkNicknameDuplication(String nickname){
-//        return userRepository.existsByNickname(nickname);
-//    }
-
-
     //로그인
     public LoginRequest login(LoginRequest loginRequest) {
         System.out.println(loginRequest.getUserId());
@@ -69,17 +60,5 @@ public class UserService {
         return null;
     }
 
-//    // 탈퇴하기
-//    public boolean withdrawal(String userId, String password) {
-////        User  = userRepository.findByUserId(userId).orElseThrow(() -> new UsernameNotFoundException("아이디가 존재하지 않습니다."));
-//
-////        if (passwordEncoder.matches(password, user.getPassword())) {
-////            userRepository.delete(user);
-////            return true;
-////        } else {
-////            return false;
-////        }
-//        return  false;
-//    }
 
 }

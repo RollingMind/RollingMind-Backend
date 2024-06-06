@@ -1,7 +1,10 @@
 package RollingRolling.RollingMindBackend.controller.friendslist;
 
 import RollingRolling.RollingMindBackend.domain.friendslist.FriendsList;
+import RollingRolling.RollingMindBackend.domain.friendslist.FriendsListSituation;
 import RollingRolling.RollingMindBackend.domain.user.User;
+import RollingRolling.RollingMindBackend.dto.friendslist.FriendsListRequest;
+import RollingRolling.RollingMindBackend.dto.friendslist.FriendsListSituationUpdateRequest;
 import RollingRolling.RollingMindBackend.repository.friendslist.FriendsListRepository;
 import RollingRolling.RollingMindBackend.service.friendslist.FriendsListService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +26,15 @@ public class FriendsListController {
         return ResponseEntity.ok().body(friendsList);
     }
 
-    @PostMapping("/addfriends")
+    @PostMapping("/add") //친구 추가 요청
     public ResponseEntity<?> add(@RequestBody FriendsList Request) {
         FriendsList friendsList = friendsListService.add(Request);
         return ResponseEntity.status(HttpStatus.CREATED).body(friendsList);
+    }
+
+    @PatchMapping("/accept/{fromUser}")  // 친구 추가 수락
+    public ResponseEntity<?> accept(@PathVariable("fromUser") int fromUser, @RequestBody FriendsListSituationUpdateRequest friendsListSituation){
+        FriendsList friendsList = friendsListService.update(fromUser, friendsListSituation.getSituation());
+        return ResponseEntity.ok().body(friendsList);
     }
 }
