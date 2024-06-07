@@ -1,10 +1,13 @@
 package RollingRolling.RollingMindBackend.controller.user;
 
 
+import RollingRolling.RollingMindBackend.domain.friendslist.FriendsList;
 import RollingRolling.RollingMindBackend.domain.user.Login;
 import RollingRolling.RollingMindBackend.domain.user.User;
+import RollingRolling.RollingMindBackend.dto.friendslist.FriendsListSituationUpdateRequest;
 import RollingRolling.RollingMindBackend.dto.user.LoginRequest;
 import RollingRolling.RollingMindBackend.dto.user.SignupRequest;
+import RollingRolling.RollingMindBackend.repository.user.UserRepository;
 import RollingRolling.RollingMindBackend.service.user.UserService;
 import RollingRolling.RollingMindBackend.validator.CheckNicknameValidator;
 import RollingRolling.RollingMindBackend.validator.CheckUserIdValidator;
@@ -17,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +43,8 @@ public class UserController {
     private final CheckNicknameValidator checkNicknameValidator;
     @Autowired
     private final UserService userService;
+    @Autowired
+    private final UserRepository userRepository;
 
     // 커스텀 유효성 검증을 위해 추가
     @InitBinder
@@ -75,45 +81,26 @@ public class UserController {
         return "redirect:/login";
     }
 
+    //비밀번호 찾기
+    @PostMapping("/findPassword")
+    public String findPassword(@RequestBody User Request){
+        User user = userRepository.findByUserId(Request.getUserId()).get();
+        if(user == null && !user.getUserId().equals(Request.getUserId())){
+            return "redirect:/findPassword";
+        }else {
+            return "redirect:/changePassword/{userId}";
+        }
+    }
+
+    //비밀번호 변경
+    @PatchMapping("/changePassword/{userId}")
+    public ResponseEntity<?> ChangePW(@PathVariable("userId") String userId, @RequestBody String password){
+        User user = userService.update(userId, password);
+        return ResponseEntity.ok().body(user);
+    }
 
 
-//    // 중복 처리
-//    @PostMapping("/exists")
-//    public String joinProc(@Valid User Request, BindingResult bindingResult, Model model) {
-//
-//        /* 검증 */
-//        if(bindingResult.hasErrors()) {
-//            /* 회원가입 실패 시 입력 데이터 값 유지 */
-//            model.addAttribute("userDto", Request);
-//
-//            /* 유효성 검사를 통과하지 못 한 필드와 메시지 핸들링 */
-//            Map<String, String> errorMap = new HashMap<>();
-//
-//            for(FieldError error : bindingResult.getFieldErrors()) {
-//                errorMap.put("valid_"+error.getField(), error.getDefaultMessage());
-//                System.out.println("error message : "+error.getDefaultMessage());
-//            }
-//
-//            /* 회원가입 페이지로 리턴 */
-//            return "api/user/save";
-//        }
-//
-//        // 회원가입 성공 시
-//        userService.save(Request);
-//        return "redirect:/api/login";
-//    }
-//
-//    @GetMapping("/exists/{userId}")
-//    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
-//        return ResponseEntity.ok(userService.checkUserIdDuplication(userId));
-//    }
-//
-//    @GetMapping("/exists/{nickname}")
-//    public ResponseEntity<Boolean> checkNicknameDuplicate(@PathVariable String nickname){
-//        return ResponseEntity.ok(userService.checkNicknameDuplication(nickname));
-//    }
-//
-//
+
 //    // 탈퇴하기
 //    @PostMapping("/withdrawal")
 //    public String memberWithdrawal(@RequestParam String password, Model model, Authentication authentication) {
