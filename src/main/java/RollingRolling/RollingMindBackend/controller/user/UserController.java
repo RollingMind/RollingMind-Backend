@@ -2,6 +2,7 @@ package RollingRolling.RollingMindBackend.controller.user;
 
 
 import RollingRolling.RollingMindBackend.domain.user.User;
+import RollingRolling.RollingMindBackend.dto.email.EmailCheckRequest;
 import RollingRolling.RollingMindBackend.dto.user.LoginRequest;
 import RollingRolling.RollingMindBackend.repository.user.UserRepository;
 import RollingRolling.RollingMindBackend.service.email.EmailService;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -88,5 +90,10 @@ public class UserController {
         String confirm = emailService.sendSimpleMessage(email);
 
         return confirm;
+    }
+
+    @PostMapping("/emailConfirm/codeCheck")
+    public ResponseEntity<?> confirmEmail(@RequestBody EmailCheckRequest emailDto) {
+        return ResponseEntity.ok(emailService.confirmEmail(emailDto));
     }
 }
