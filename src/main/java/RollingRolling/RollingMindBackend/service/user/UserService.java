@@ -71,4 +71,8 @@ public class UserService {
         return user;
     }
 
+    public void deleteUser(int id){  // 탈퇴하기
+        userRepository.deleteById(String.valueOf(id));
+    }
+
 }

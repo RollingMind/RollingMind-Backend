@@ -13,9 +13,6 @@ import java.util.Optional;
 @Repository
 @EnableJpaRepositories
 public interface UserRepository extends JpaRepository<User, String>{
-    boolean existsByUserId(String userId);
-    boolean existsByNickname(String nickname);
-
     List<User> findAllByIdIn(List<Integer> id);
 
     Optional<User> findByUserId(String userId);
