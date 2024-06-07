@@ -47,4 +47,8 @@ public class User {
         this.createdDate = createdDate;
         this.loginWay = loginWay;
     }
+
+    public void update(String password){
+        this.password = password;
+    }
 }

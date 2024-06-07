@@ -1,6 +1,8 @@
 package RollingRolling.RollingMindBackend.service.user;
 
 
+import RollingRolling.RollingMindBackend.domain.friendslist.FriendsList;
+import RollingRolling.RollingMindBackend.domain.friendslist.FriendsListSituation;
 import RollingRolling.RollingMindBackend.domain.user.Login;
 import RollingRolling.RollingMindBackend.domain.user.User;
 import RollingRolling.RollingMindBackend.dto.user.LoginRequest;
@@ -60,5 +62,13 @@ public class UserService {
         return null;
     }
 
+    public User update(String userId, String password){  //비밀번호 변경
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("유저를 찾을 수 없습니다. id: " + userId));
+
+        user.update(passwordEncoder.encode(password));
+        userRepository.save(user);
+        return user;
+    }
 
 }
