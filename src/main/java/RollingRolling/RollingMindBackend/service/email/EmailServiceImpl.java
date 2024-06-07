@@ -76,11 +76,9 @@ public class EmailServiceImpl implements EmailService{
         if (code.equals(findCode)) {
             System.out.println("일치");
             codeStorage.remove(email);
-            System.out.println(codeStorage);
             return true;
         }
         System.out.println("불일치");
-        System.out.println(codeStorage);
         return false;
     }
 }
