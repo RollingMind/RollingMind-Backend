@@ -92,8 +92,17 @@ public class UserController {
         return confirm;
     }
 
+    // 인증번호 일치 확인
     @PostMapping("/emailConfirm/codeCheck")
     public ResponseEntity<?> confirmEmail(@RequestBody EmailCheckRequest emailDto) {
         return ResponseEntity.ok(emailService.confirmEmail(emailDto));
+    }
+
+    // 아이디 찾기
+    @PostMapping("/findUserId")
+    public String findUserId(@RequestBody User Request) {
+        User user = userRepository.findByEmail(Request.getEmail()).get();
+        System.out.println(Request.getUserId());
+        return "redirect:/login";
     }
 }
