@@ -4,6 +4,7 @@ package RollingRolling.RollingMindBackend.controller.user;
 import RollingRolling.RollingMindBackend.domain.user.User;
 import RollingRolling.RollingMindBackend.dto.user.LoginRequest;
 import RollingRolling.RollingMindBackend.repository.user.UserRepository;
+import RollingRolling.RollingMindBackend.service.email.EmailService;
 import RollingRolling.RollingMindBackend.service.user.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,8 @@ public class UserController {
     private final UserService userService;
     @Autowired
     private final UserRepository userRepository;
-
+    @Autowired
+    private final EmailService emailService;
 
 
     //회원가입
@@ -77,5 +79,14 @@ public class UserController {
     public String userWithdrawal(@PathVariable("id") int id){
         userService.deleteUser(id);
         return "redirect:/login";
+    }
+
+    //이메일 인증
+    @PostMapping("/emailConfirm")
+    public String emailConfirm(@RequestParam("email") String email) throws Exception {
+
+        String confirm = emailService.sendSimpleMessage(email);
+
+        return confirm;
     }
 }
