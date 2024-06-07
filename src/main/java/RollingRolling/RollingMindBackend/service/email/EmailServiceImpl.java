@@ -1,26 +1,32 @@
 package RollingRolling.RollingMindBackend.service.email;
 
+import RollingRolling.RollingMindBackend.dto.email.EmailCheckRequest;
 import jakarta.mail.Message;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService{
 
     @Autowired
     JavaMailSender emailSender;
+    public static HashMap<String, String> codeStorage = new HashMap<>();
 
     public static final String ePw = createKey();
 
     private MimeMessage createMessage(String to)throws Exception{
         System.out.println("받는 대상 : "+ to);
         System.out.println("인증 번호 : "+ePw);
+        codeStorage.put(to, ePw);
         MimeMessage  message = emailSender.createMimeMessage();
 
         message.addRecipients(MimeMessage.RecipientType.TO, to);//받는 대상
@@ -60,5 +66,21 @@ public class EmailServiceImpl implements EmailService{
             throw new IllegalArgumentException();
         }
         return ePw;
+    }
+
+    @Override
+    public boolean confirmEmail(EmailCheckRequest request){
+        String email = request.getEmail();
+        String code = request.getCode();
+        String findCode = codeStorage.get(email);
+        if (code.equals(findCode)) {
+            System.out.println("일치");
+            codeStorage.remove(email);
+            System.out.println(codeStorage);
+            return true;
+        }
+        System.out.println("불일치");
+        System.out.println(codeStorage);
+        return false;
     }
 }
