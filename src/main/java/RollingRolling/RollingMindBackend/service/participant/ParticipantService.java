@@ -2,10 +2,12 @@ package RollingRolling.RollingMindBackend.service.participant;
 
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
 import RollingRolling.RollingMindBackend.domain.participant.ParticipantStatus;
+import RollingRolling.RollingMindBackend.domain.user.User;
 import RollingRolling.RollingMindBackend.dto.participant.AddParticipantRequest;
 import RollingRolling.RollingMindBackend.exception.ErrorCode;
 import RollingRolling.RollingMindBackend.exception.ParticipantNotFoundException;
 import RollingRolling.RollingMindBackend.repository.participant.ParticipantRepository;
+import RollingRolling.RollingMindBackend.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ParticipantService {
     private final ParticipantRepository participantRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Participant save(AddParticipantRequest request){  //방 참가자 테이블에 저장
@@ -47,5 +50,9 @@ public class ParticipantService {
         } else {
             throw new ParticipantNotFoundException(ErrorCode.PARTICIPANT_NOT_FOUND);
         }
+    }
+
+    public List<String> findUser(String nickname){
+        return userRepository.findByNameAndNicknameAndId(nickname);
     }
 }

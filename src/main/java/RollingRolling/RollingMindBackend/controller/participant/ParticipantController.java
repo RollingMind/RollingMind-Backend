@@ -1,6 +1,7 @@
 package RollingRolling.RollingMindBackend.controller.participant;
 
 import RollingRolling.RollingMindBackend.domain.participant.Participant;
+import RollingRolling.RollingMindBackend.domain.user.User;
 import RollingRolling.RollingMindBackend.dto.participant.AddParticipantRequest;
 import RollingRolling.RollingMindBackend.dto.participant.ParticipantStatusUpdateRequest;
 import RollingRolling.RollingMindBackend.exception.ParticipantNotFoundException;
@@ -22,6 +23,12 @@ public class ParticipantController {
         Participant addParticipantRequest = participantService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(addParticipantRequest);
     }
+
+    @GetMapping("/find/{nickname}") // 참가자 찾기
+    public ResponseEntity<?> findUser(@PathVariable("nickname") String nickname){
+        return ResponseEntity.ok().body(participantService.findUser(nickname));
+    }
+
     @GetMapping("/{room_id}")  //특정 방의 참가자 목록 조회
     public ResponseEntity<List<Participant>> findParticipant(@PathVariable("room_id") String room_id){
         return ResponseEntity.ok().body(participantService.findAllByRoomIdAndStatus(room_id));
