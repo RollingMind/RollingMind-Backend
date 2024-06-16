@@ -35,9 +35,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private LoginWay loginWay;
 
+    @Column(name = "image")
+    private String image;
+
 
     @Builder
-    public User(int id, String userId, String password, String name, String nickname, String email, String createdDate, LoginWay loginWay) {
+    public User(int id, String userId, String password, String name, String nickname, String email, String createdDate, LoginWay loginWay, String image) {
         this.id = id;
         this.userId = userId;
         this.password = password;
@@ -46,6 +49,7 @@ public class User {
         this.email = email;
         this.createdDate = createdDate;
         this.loginWay = loginWay;
+        this.image = image;
     }
 
     public void update(String password){

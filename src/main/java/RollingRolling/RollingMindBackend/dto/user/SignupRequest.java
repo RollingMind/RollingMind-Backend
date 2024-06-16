@@ -16,4 +16,5 @@ public class SignupRequest {
     private String email;
     private String createdDate;
     private LoginWay loginWay;
+    private String image;
 }
