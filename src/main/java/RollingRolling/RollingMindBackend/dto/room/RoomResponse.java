@@ -16,6 +16,7 @@ public class RoomResponse {
     private RoomOpen open;
     private RoomParticipationRequest participantRequest;
     private String title;
+    private String content;
     private LocalDateTime releaseDate;
     private RoomTemplateType templateType;
     private int participantsCount;
@@ -27,6 +28,7 @@ public class RoomResponse {
         this.open = room.getOpen();
         this.participantRequest = room.getParticipationRequest();
         this.title = room.getTitle();
+        this.content = room.getContent();
         this.releaseDate = room.getReleaseDate();
         this.templateType = room.getTemplateType();
         this.participantsCount = (int)participantsCount;
