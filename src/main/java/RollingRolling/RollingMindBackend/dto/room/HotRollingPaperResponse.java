@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public interface HotRollingPaperResponse {
     Long getIdx();
     String getNickname();
+    String getImage();
     String getRoomId();
     String getOpen();
     String getParticipationRequest();
