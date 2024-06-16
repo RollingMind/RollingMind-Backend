@@ -85,7 +85,7 @@ public class RoomService {
         return roomList1;
     }
 
-    public RoomResponse getRoom(String roomId) throws RoomNotFoundException {
+    public RoomResponse getRoom(String roomId) throws RoomNotFoundException {  //roomId인 방 정보
         List<Object[]> results = roomRepository.findRoomWithParticipantCountByRoomId(roomId);
         if (!results.isEmpty()) {
             Object[] result = results.get(0);
@@ -98,7 +98,7 @@ public class RoomService {
     }
 
     @Transactional
-    public void delete(String roomId) throws BadRequestException, RoomNotFoundException {
+    public void delete(String roomId) throws BadRequestException, RoomNotFoundException {  //방 삭제
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails currentUserDetails = (CustomUserDetails) authentication.getPrincipal();
         int currentUserId = currentUserDetails.getId();
