@@ -22,8 +22,8 @@ public class HotRollingPaperController {
         return ResponseEntity.ok().body(hotRollingPaperService.findHotRollingPaper());
     }
     @GetMapping("/search")
-    public ResponseEntity<List<Room>> searchRooms(@RequestParam("keyword") String keyword) throws RoomNotFoundException {  //롤링페이퍼 방 검색
-        List<Room> rooms = hotRollingPaperService.searchRoomsByTitle(keyword);
+    public ResponseEntity<List<HotRollingPaperResponse>> searchRooms(@RequestParam("keyword") String keyword) throws RoomNotFoundException {  //롤링페이퍼 방 검색
+        List<HotRollingPaperResponse> rooms = hotRollingPaperService.searchRoomsByTitle(keyword);
         if(rooms.isEmpty()){  //검색결과가 없을 경우
             throw new RoomNotFoundException(ErrorCode.ROOM_NOT_FOUND);
         }

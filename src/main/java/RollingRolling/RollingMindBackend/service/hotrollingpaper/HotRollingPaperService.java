@@ -17,7 +17,7 @@ public class HotRollingPaperService {
         return roomRepository.findAllRoomsWithParticipantsCount();
     }
 
-    public List<Room> searchRoomsByTitle(String keyword){  //제목으로 롤링페이퍼 방 검색
+    public List<HotRollingPaperResponse> searchRoomsByTitle(String keyword){  //제목으로 롤링페이퍼 방 검색
         return roomRepository.findByTitleContaining(keyword);
     }
 }
